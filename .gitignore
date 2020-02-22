@@ -3,3 +3,4 @@ venv/
 secret_key.txt
 **/token.pickle
 **/client_secret.json
+db.sqlite3
