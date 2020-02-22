@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1 class="m-3">Users</h1>
+
+<div class="container">
+	<div class="row">
+		<div class="col"><h5>Username</h5></div>
+		<div class="col"><h5>Name</h5></div>
+		<div class="col"><h5>Membership status</h5></div>
+	</div>
+
+	{% for userprofile in userprofiles %}
+	<hr>
+	<a href="{% url 'manageUser' userprofile.user.username %}" class="link-unstyled">
+		<div class="row">
+			<div class="col">
+				<p>
+					{{ userprofile.user.username }}
+				</p>
+			</div>
+			<div class="col">
+				<p>
+					{{ userprofile.user.first_name }} {{ userprofile.user.last_name }}
+				</p>
+			</div>
+			<div class="col">
+				<p>
+					{% if userprofile.extended_membership_status %}
+					Extended
+					{% elif userprofile.active %}
+					Active
+					{% else %}
+					Inactive
+					{% endif %}
+				</p>
+			</div>
+		</div>
+	</a>
+	{% endfor %}
+</div>
+<!-- <table class="table border">
+	<thead>
+		<tr>
+			<th scope="col" class="text-center">
+				Username
+			</th>
+			<th scope="col" class="text-center">
+				Name</th>
+			<th scope="col" class="text-center">
+				Membership status
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for userprofile in userprofiles %}
+		<tr>
+			<th scope="row" class="text-center">
+				<a href="{% url 'manageUser' %}/{{ user.username }}" class="link-unstyled">
+					{{userprofile.user.username}}
+				</a>
+			</th>
+			<td class="text-center">
+				{{ userprofile.user.first_name }} {{ userprofile.user.last_name }}
+			</td>
+			<td class="text-center">
+				{% if userprofile.extended_membership_status %}
+				Extended
+				{% elif userprofile.active %}
+				Active
+				{% else %}
+				Inactive
+				{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+ -->
+{% endblock %}

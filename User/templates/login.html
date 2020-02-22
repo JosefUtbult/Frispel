@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1 class="m-3">Login</h1>
+
+<div class="row">
+	<div class="col-3"></div>
+	<form method="post" class="col-6 ">
+	    {% csrf_token %}
+		<div class="form-group">
+			<label for="username">Username</label>
+			<input type="text" name="username" class="form-control" id="username" aria-describedby="loginhelp" placeholder="Enter username">
+			<small id="loginhelp" class="form-text text-muted">{{ result }}</small>
+
+		</div>
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" name="password" class="form-control" id="password" placeholder="Password">
+		</div>	
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+{% endblock %}

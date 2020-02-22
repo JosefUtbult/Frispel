@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<h1 class="m-3">{{ user.username }}</h1>
+
+<div class="row m-3">
+	<div class=""></div>
+	<div class="col-12 card">
+		<div class="card-body row">
+			<div class="col-6 mt-2">
+				<h5>Membership paid until</h5>
+			</div>
+			<div class="col-6">
+				<p>{{ userprofile.expiry_date|date:"d M Y" }}</p>
+			</div>
+		</div>
+		<hr>
+		<div class="card-body row">
+			<div class="col-6">
+				<h5>Name</h5>
+			</div>
+			<div class="col-6">
+				<p>{{ user.first_name }} {{ user.last_name }}</p>
+			</div>
+		</div>
+		<hr>
+		<div class="card-body row">
+			<div class="col-6">
+				<h5>Email</h5>
+			</div>
+			<div class="col-6">
+				<p>{{ user.email }}</p>
+			</div>
+		</div>
+		<hr>
+		<div class="card-body row">
+			<div class="col-6">
+				<h5>LTU ID</h5>
+			</div>
+			<div class="col-6">
+				<p>{{ userprofile.ltu_id }}</p>
+			</div>
+		</div>
+		<hr>
+		<div class="card-body row">
+			<div class="col-6">
+				<h5>Trubadur membership</h5>
+			</div>
+			<div class="col-6">
+				<p>{{ userprofile.trubadur_member }}</p>
+			</div>
+		</div>
+		<hr>
+		<div class="card-body row">
+			<div class="col-6">
+				<h5>Favorite food</h5>
+			</div>
+			<div class="col-6">
+				<p>{{ userprofile.favorite_food }}</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<form action="{% url 'updateAccount' %}" method="get">
+	<input type="submit" value="Update" class="btn btn-secondary">
+</form>
+{% endif %}
+{% endblock %}

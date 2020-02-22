@@ -1,0 +1,23 @@
+.calenderColumn {
+	min-width: 14.28%;
+	max-width: 14.28%;
+	position: relative;
+}
+
+.dateNumber {
+	background-color: var(--frispel-red);
+	color: white;
+}
+
+.block {
+	
+}
+
+.disabled {
+	background-color: var(--frispel-light-gray);
+}
+
+.booked-block {
+	color: white;
+	background-color: var(--frispel-red);
+}

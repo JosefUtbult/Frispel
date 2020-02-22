@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'calenderStyle.css' %}">
+
+<h1 class="m-3">Calendar</h1>
+
+{% for current_date in date_list %}
+<hr>
+<div class="row">
+	<div class="col-md-6 d-flex justify-content-center">
+		<div>
+			<h3>{{ current_date.date|date:"d M Y" }}</h3>
+		</div>
+	</div>
+	<div class="col-md-6">
+		{% for block in current_date.block %}
+		<div class="rounded d-block m-2 {% if block.user != None and block.user != user.username %}disabled{% endif %} {% if block.user == user.username %}primary{% else %}border{% endif %}">
+			<div class="row p-2">
+				<div class="col-8">
+					<h4>{{ block.start|date:"H:i" }} - {{ block.end|date:"H:i" }}</h4>
+				</div>
+				<div class="col-4">
+					
+					{% if block.user == user.username %}
+					<form method="post">
+						{% csrf_token %}
+						<input type="hidden" name="googleId" value="{{ block.googleId }}">
+						<input type="hidden" name="start" value="{{ block.start|date:'H i d m Y' }}">
+						<input type="hidden" name="end" value="{{ block.end|date:'H i d m Y' }}">
+						<input type="submit" name="button" value="Unbook" class="btn btn-secondary">
+					</form>
+					{% elif block.user == None %}
+					{% if bookings|length < userprofile.bookings_allowed %}
+					<form method="post">
+						{% csrf_token %}
+						<input type="hidden" name="start" value="{{ block.start|date:'H i d m Y' }}">
+						<input type="hidden" name="end" value="{{ block.end|date:'H i d m Y' }}">
+						<input type="submit" name="button" value="Book" class="btn btn-primary">
+					</form>
+					{% elif userprofile.bookings_allowed <= 1%}
+					<p>You already have an active booking</p>
+					{% else %}
+					<p>You have to many active bookings</p>
+					{% endif %}
+					{% else %}
+					<p>Booked by {{ block.user }}</p>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		{% endfor %}	
+	</div>
+</div>
+{% endfor %}
+<hr>
+
+{% endblock %}	

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% if user.is_staff %}
+<h1 class="m-3">{{ user }}</h1>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,200 @@
+:root {
+    --frispel-gray:#3e4a4d;
+    --frispel-shadow-gray:#303436;
+
+	--frispel-light-gray:#f0f6f7;
+
+
+    --frispel-red:#bf423d;
+    --frispel-shadow-red:#8c2921;
+}
+
+.bodycontainter {
+	min-height: 100vh;
+}
+
+.messages {
+	list-style-type:none
+}
+
+#hiddenImage {
+	background-color: var(--frispel-gray);
+	position: absolute;
+}
+
+#hiddenImage > img {
+	width: 1px;
+	height: 1px;
+}
+
+h1, h2, h3, h4, h5, h6, p, strong, label, li, small {
+	color: var(--frispel-gray);	
+    font-family: 'Inria Serif', serif;
+}
+
+.btn {
+    font-family: 'Kulim Park', sans-serif;
+}
+
+.nav-link, .link-unstyled{
+	color: inherit; !important;
+    font-family: 'Kulim Park', sans-serif;
+
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-link:link, .link-unstyled:link {
+  text-decoration: none;
+}
+
+.nav-link:hover, .link-unstyled:hover {
+	color: inherit; !important;
+    text-decoration: none;
+}
+
+.dropdown-item {
+    font-family: 'Kulim Park', sans-serif;
+}
+
+.logo {
+	width: 50px;
+}
+
+.title {
+	color: white;
+	font-size: 30px;
+
+    font-family: 'Inria Serif', serif;
+}
+
+
+.navbar {
+	box-shadow: 0 5px var(--frispel-red);
+}
+
+.navbar-toggler-icon {
+	background-size: 100% !important;
+	margin-top: 10%;
+	margin-bottom: 10%;
+
+	width: 30px !important;
+}
+
+.button-navbar {
+	float: right
+}
+
+@media screen and (max-width: 991px) {
+	.button-navbar {
+		float: none;
+	}
+
+	.nav-link, .dropdown-item {
+		font-size: calc(12px + 1.5vw);
+	}
+}
+
+.bg-frispel-dark {
+	background-color: var(--frispel-gray) !important;
+}
+
+.sneaky-dino {
+	height: 10%; 
+	width: 100%; 
+	overflow: hidden;
+}
+
+.sneaky-dino > img {
+	object-fit: cover;   
+	object-position: 100% 0; 
+	width: 200%; 
+	height: 100px;
+}
+
+.dropdown-menu {
+	color: var(--frispel-gray);
+}
+
+.img-fluid {
+	background-attachment: fixed;
+	background-position: 0;
+}
+
+.img-fluid-container {
+	height: 100%;
+	margin: 0;
+	padding-top: 40%;
+	padding-bottom: 40%;
+	background-color: rgba(255, 255, 255, 0);
+
+    transition: background-color 0.2s ease;
+}
+
+.img-fluid-container:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.img-fluid-container > h1 {
+	background-color: transparent;
+	color: white;
+
+	text-shadow: none;
+    transition: text-shadow 0.2s ease;
+}
+
+.img-fluid-container:hover > h1 {
+	text-shadow: var(--frispel-shadow-gray) 1px 1px 2px;
+}
+
+footer {
+	background-color: var(--frispel-gray);
+/*	position: absolute;
+	width: 100%;
+	bottom: 0;*/
+
+}
+
+footer h1, footer h2, footer h2, footer h3, footer h4, footer h5, footer h6, footer p {
+	color: white;
+    font-family: 'Kulim Park', sans-serif;
+
+}
+
+.primary h1, .primary h2, .primary h3, .primary h4, .primary h5, .primary h6, .primary p, .primary strong, .primary label, .primary li, .primary small{
+	color: white;
+}
+
+.btn-primary, .primary {
+	background-color: var(--frispel-red) !important;
+	border-color: var(--frispel-red) !important;
+}
+
+.btn-primary:focus, .btn:active {
+   outline: none !important;
+   box-shadow: 2px 2px var(--frispel-shadow-red) !important;
+}
+
+.btn-primary-reversed {
+	background-color: white !important;
+}
+
+.btn-primary-reversed:focus, .btn:active {
+   outline: none !important;
+   box-shadow: 2px 2px var(--frispel-shadow-gray) !important;
+}
+
+.btn-secondary {
+	background-color: var(--frispel-gray) !important;
+	border-color: var(--frispel-gray) !important;
+}
+
+
+.btn-secondary:focus, .btn:active {
+   outline: none !important;
+   box-shadow: 2px 2px var(--frispel-shadow-gray) !important;
+}
+
+.calenderColumn {
+	
+}

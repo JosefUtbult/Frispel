@@ -1,0 +1,5 @@
+venv/
+*sublime*
+secret_key.txt
+**/token.pickle
+**/client_secret.json
