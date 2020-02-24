@@ -4,3 +4,6 @@ secret_key.txt
 **/token.pickle
 **/client_secret.json
 db.sqlite3
+static_export/
+*.sock
+__pycache__/
