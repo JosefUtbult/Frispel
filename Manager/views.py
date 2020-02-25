@@ -24,7 +24,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 def users(request):
 	userprofiles = Userprofile.objects.all()
 	for userprofile in userprofiles:
-		userprofile.active = userprofile.expiry_date >= date.today()
+		userprofile.active = userprofile.expiry_date > date.today()
 
 	return render(request, 'users.html', {'userprofiles': userprofiles})
 
