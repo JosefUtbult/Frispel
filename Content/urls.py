@@ -19,4 +19,5 @@ from Content import views
 
 urlpatterns = [
 	path('', views.home, name='home'),
+	path('notAMember', views.notAMember, name='notAMember'),
 ]

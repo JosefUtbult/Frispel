@@ -74,7 +74,7 @@ def signup(request):
 			raw_password = user_form.cleaned_data.get('password1')
 			user = authenticate(username=username, password=raw_password)
 			super_login(request, user)
-			return redirect('home')
+			return redirect('notAMember')
 
 	else:
 		# Creates empty forms for the get method

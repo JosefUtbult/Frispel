@@ -10,7 +10,7 @@
 #													#
 #####################################################
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from datetime import datetime, date, timedelta
@@ -20,6 +20,8 @@ from User.models import Userprofile
 
 @login_required(login_url='login')
 def calendar(request):
+	if (not Userprofile.objects.get(user=request.user).extended_membership_status) and Userprofile.objects.get(user=request.user).expiry_date <= date.today():
+		return redirect('notAMember')
 
 	# Checks if you want to book or unbook a block
 	if request.method == 'POST':

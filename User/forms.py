@@ -36,10 +36,11 @@ class Manageruserform(forms.ModelForm):
 
 class ManagerprofileForm(forms.ModelForm):
 
+	bookings_allowed = forms.IntegerField(label='Number of bookings allowed')
 	trubadur_member = forms.BooleanField(label='Trubadur Member', required=False)
 	extended_membership_status = forms.BooleanField(label='Extended Membership', required=False, 
 		help_text='Extend membership indefinitely, disabling the expiry date.')
 
 	class Meta:
 		model = Userprofile
-		fields = ('trubadur_member', 'extended_membership_status')
+		fields = ('bookings_allowed', 'trubadur_member', 'extended_membership_status')

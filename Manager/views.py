@@ -10,7 +10,7 @@
 #													#
 #####################################################
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from django.shortcuts import render, redirect
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
@@ -22,7 +22,11 @@ from django.utils.datastructures import MultiValueDictKeyError
 
 @staff_member_required
 def users(request):
-	return render(request, 'users.html', {'userprofiles': Userprofile.objects.all()})
+	userprofiles = Userprofile.objects.all()
+	for userprofile in userprofiles:
+		userprofile.active = userprofile.expiry_date >= date.today()
+
+	return render(request, 'users.html', {'userprofiles': userprofiles})
 
 
 @staff_member_required
@@ -57,6 +61,7 @@ def updateUser(request, username):
 
 			userprofile.ltu_id = userprofile_form.cleaned_data.get("ltu_id")
 			userprofile.favorite_food = userprofile_form.cleaned_data.get("favorite_food")
+			userprofile.bookings_allowed = manager_userprofileform.cleaned_data.get("bookings_allowed")
 			userprofile.trubadur_member = manager_userprofileform.cleaned_data.get("trubadur_member")
 			userprofile.extended_membership_status = manager_userprofileform.cleaned_data.get("extended_membership_status")
 			userprofile.save()
