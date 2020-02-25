@@ -13,7 +13,7 @@
 				<h5>Membership paid until</h5>
 			</div>
 			<div class="col-6">
-				<p>{{ userprofile.expiry_date|date:"d M Y" }}</p>
+				<p>{% if userprofile.extended_membership_status %}Extended{% else %}{{ userprofile.expiry_date|date:"d M Y" }}{% endif %}</p>
 			</div>
 		</div>
 		<hr>

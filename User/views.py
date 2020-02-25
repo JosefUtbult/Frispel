@@ -67,7 +67,6 @@ def signup(request):
 			# stores it
 			userprofile = userprofile_form.save(commit=False)
 			userprofile.user = user
-			userprofile.membership_status = False
 			userprofile.save()
 
 			# Authenticates and signs in the new user

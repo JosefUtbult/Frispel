@@ -41,42 +41,5 @@
 	</a>
 	{% endfor %}
 </div>
-<!-- <table class="table border">
-	<thead>
-		<tr>
-			<th scope="col" class="text-center">
-				Username
-			</th>
-			<th scope="col" class="text-center">
-				Name</th>
-			<th scope="col" class="text-center">
-				Membership status
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for userprofile in userprofiles %}
-		<tr>
-			<th scope="row" class="text-center">
-				<a href="{% url 'manageUser' %}/{{ user.username }}" class="link-unstyled">
-					{{userprofile.user.username}}
-				</a>
-			</th>
-			<td class="text-center">
-				{{ userprofile.user.first_name }} {{ userprofile.user.last_name }}
-			</td>
-			<td class="text-center">
-				{% if userprofile.extended_membership_status %}
-				Extended
-				{% elif userprofile.active %}
-				Active
-				{% else %}
-				Inactive
-				{% endif %}
-			</td>
-		</tr>
-		{% endfor %}
-	</tbody>
-</table>
- -->
+
 {% endblock %}

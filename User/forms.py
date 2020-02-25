@@ -17,17 +17,17 @@ class CustomUserForm(forms.ModelForm):
 
 class UserprofileForm(forms.ModelForm):
 
-	ltu_id = forms.CharField(label='LTU-ID', max_length=100, required=False, help_text="This is required for access into Frispel. If you don't have an LTU ID, leave this blank and contact the chairman of Frispel for more information.")
+	ltu_id = forms.CharField(label='LTU-ID', max_length=100, required=False, help_text="This is required for access into Frispel. If you don't have an LTU ID, leave this blank and contact the chairman of Frispel for more information. Do not add an invalid LTU id!")
 	favorite_food = forms.CharField(label='Favorite food', max_length=100, required=True)
-	trubadur_member = forms.BooleanField(label='Are you a member of Trubadur?', required=False)
 
 	class Meta:
 		model = Userprofile
-		fields = ('ltu_id', 'trubadur_member', 'favorite_food')
+		fields = ('ltu_id', 'favorite_food')
 
 class Manageruserform(forms.ModelForm):
 
-	is_staff = forms.BooleanField(label='Manager privileges')
+	is_staff = forms.BooleanField(label='Manager privileges', required=False, 
+		help_text='Give user access to the Manager page and the Users page.')
 
 	class Meta:
 		model = User
@@ -36,9 +36,10 @@ class Manageruserform(forms.ModelForm):
 
 class ManagerprofileForm(forms.ModelForm):
 
-	extended_membership_status = forms.IntegerField(label='Extended Membership')
-	expiry_date = forms.DateField(label='Membership expiry date')
+	trubadur_member = forms.BooleanField(label='Trubadur Member', required=False)
+	extended_membership_status = forms.BooleanField(label='Extended Membership', required=False, 
+		help_text='Extend membership indefinitely, disabling the expiry date.')
 
 	class Meta:
 		model = Userprofile
-		fields = ('extended_membership_status', 'expiry_date')
+		fields = ('trubadur_member', 'extended_membership_status')

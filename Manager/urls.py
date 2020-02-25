@@ -18,5 +18,7 @@ from django.urls import path, include
 from Manager import views
 
 urlpatterns = [
-    path('/user/<str:username>', views.users, name='manageUser'),
+    path('/user/<str:username>', views.user, name='manageUser'),
+    path('/updateUser/<str:username>', views.updateUser, name='updateUser'),
+    path('/users', views.users, name='manageUsers'),
 ]

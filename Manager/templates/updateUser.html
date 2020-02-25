@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% if user.is_staff %}
+<h1 class="m-3">{{ currentUser.user.username }} - Update</h1>
+<div class="row">
+	<div class="col-3"></div>
+	<form method="post" class="col-6 ">
+	    {% csrf_token %}
+	    <div class="form-group row">
+	    	<div class="col-4">
+	    		<input type="submit" name="dateButton" value="-12" class="btn btn-secondary">
+	    		<input type="submit" name="dateButton" value="-6" class="btn btn-secondary">
+	    	</div>
+	    	<div class="col-4">
+	    		<input type="date" name="date" value="{{ currentUser.expiry_date|date:'Y-m-d' }}" class="form-control">
+	    	</div>
+	    	<div class="col-4">
+	    		<input type="submit" name="dateButton" value="+6" class="btn btn-secondary">
+	    		<input type="submit" name="dateButton" value="+12" class="btn btn-secondary">
+	    	</div>
+	    </div>
+	    {{ extended_user_form|crispy }}
+	    {{ userprofile_form|crispy }}
+	    {{ manager_userprofileform|crispy }}
+	    {{ manager_userform|crispy }}
+		<input type="submit" value="Set" class="btn btn-secondary"></form>
+	</form>
+</div>
+{% endif %}
+{% endblock %}
