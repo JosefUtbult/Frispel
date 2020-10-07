@@ -52,9 +52,15 @@ def trubadur(request):
             for userprofile in userprofiles:
                 userprofile.expiry_date = delta
                 userprofile.save()
+
         except MultiValueDictKeyError:
             for userprofile in userprofiles:
                 userprofile.trubadur_member = userprofile.user.username in request.POST
+                if userprofile.trubadur_member:
+                    try:
+                        userprofile.expiry_date = request.POST['date']
+                    except ValueError:
+                        pass
                 userprofile.save()
 
         userprofiles = Userprofile.objects.filter(trubadur_member=True)
