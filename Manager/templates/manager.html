@@ -3,6 +3,22 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<h1 class="m-3">Manager</h1>
-
+<h1 class="m-3">
+    Manager
+</h1>
+<div class="row">
+    <div class="col-sm-3 col-1"></div>
+    <div class="col-sm-6 col-10">
+        <hr>
+        <form action="{% url 'manageUsers' %}" method="get" class="my-4">
+            <input type="submit" class="btn btn-primary btn-block" value="Users"/>
+        </form>
+        <form action="{% url 'maillist' %}" method="get" class="my-4">
+            <input type="submit" class="btn btn-primary btn-block" value="Mail list"/>
+        </form>
+        <form action="{% url 'trubadur' %}" method="get" class="my-4">
+            <input type="submit" class="btn btn-secondary btn-block" value="Trubadur"/>
+        </form>
+    </div>
+</div>
 {% endblock %}

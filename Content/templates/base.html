@@ -43,7 +43,7 @@
 		</li>
 		{% if user.is_staff %}
 		<li class="nav-item">
-			<a class="nav-link" href="#">Manager</a>
+			<a class="nav-link" href="{% url 'manager' %}">Manager</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="{% url 'manageUsers' %}">Users</a>
