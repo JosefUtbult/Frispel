@@ -19,6 +19,7 @@ from User.models import Userprofile
 from django.http import Http404
 from User.forms import CustomUserForm, UserprofileForm, Manageruserform, ManagerprofileForm
 from django.utils.datastructures import MultiValueDictKeyError
+from GoogleMail.google_mail import send_access_mail
 
 
 @staff_member_required
@@ -38,31 +39,30 @@ def trubadur(request):
 
     if request.method == 'POST':
         try:
-            delta = userprofiles[0].expiry_date
+            new_date = userprofiles[0].expiry_date
 
             if request.POST['dateButton'] == '+12':
-                delta += timedelta(days=365)
+                new_date += timedelta(days=365)
             elif request.POST['dateButton'] == '+6':
-                delta += timedelta(days=186)
+                new_date += timedelta(days=186)
             elif request.POST['dateButton'] == '-12':
-                delta -= timedelta(days=365)
+                new_date -= timedelta(days=365)
             elif request.POST['dateButton'] == '-6':
-                delta -= timedelta(days=186)
-
-            for userprofile in userprofiles:
-                userprofile.expiry_date = delta
-                userprofile.save()
+                new_date -= timedelta(days=186)
 
         except MultiValueDictKeyError:
+            new_date = date.fromisoformat(request.POST['date'])
             for userprofile in userprofiles:
                 userprofile.trubadur_member = userprofile.user.username in request.POST
-                if userprofile.trubadur_member:
-                    try:
-                        userprofile.expiry_date = request.POST['date']
-                    except ValueError:
-                        pass
-                userprofile.save()
 
+        users_to_update = []
+        for userprofile in userprofiles:
+            if userprofile.trubadur_member and userprofile.expiry_date != new_date:
+                userprofile.expiry_date = new_date
+                users_to_update.append(userprofile)
+            userprofile.save()
+
+        send_access_mail(users_to_update)
         userprofiles = Userprofile.objects.filter(trubadur_member=True)
     return render(request, 'trubadur.html', {'userprofiles': userprofiles})
 
@@ -115,19 +115,22 @@ def updateUser(request, username):
             userprofile.save()
 
             try:
-                if request.POST['dateButton'] == '+12':
-                    userprofile.expiry_date += timedelta(days=365)
-                elif request.POST['dateButton'] == '+6':
-                    userprofile.expiry_date += timedelta(days=186)
-                elif request.POST['dateButton'] == '-12':
-                    userprofile.expiry_date -= timedelta(days=365)
-                elif request.POST['dateButton'] == '-6':
-                    userprofile.expiry_date -= timedelta(days=186)
-
-                userprofile.save()
+                if request.POST['dateButton'] in ['+12', '+6', '-12', '-6']:
+                    if request.POST['dateButton'] == '+12':
+                        userprofile.expiry_date += timedelta(days=365)
+                    elif request.POST['dateButton'] == '+6':
+                        userprofile.expiry_date += timedelta(days=186)
+                    elif request.POST['dateButton'] == '-12':
+                        userprofile.expiry_date -= timedelta(days=365)
+                    elif request.POST['dateButton'] == '-6':
+                        userprofile.expiry_date -= timedelta(days=186)
+                    send_access_mail(userprofile)
+                    userprofile.save()
 
             except MultiValueDictKeyError:
-                userprofile.expiry_date = request.POST['date']
+                if userprofile.expiry_date != date.fromisoformat(request.POST['date']):
+                    userprofile.expiry_date = date.fromisoformat(request.POST['date'])
+                    send_access_mail(userprofile)
                 userprofile.save()
                 return redirect('manageUser', username)
 

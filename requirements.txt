@@ -1,4 +1,4 @@
-asgiref
+asgiref==3.2.10
 cachetools
 certifi
 chardet
