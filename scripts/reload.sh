@@ -1,2 +1,2 @@
 #!/bin/sh
-systemctl restart uwsgi
+sudo systemctl restart uwsgi.service

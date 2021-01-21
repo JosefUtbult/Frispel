@@ -79,7 +79,7 @@ def send_message(service, message, user_id='me'):
 
 
 def parse_userprofile(userprofile):
-    return userprofile.ltu_id is not '' and \
+    return userprofile.ltu_id != '' and \
            len(userprofile.ltu_id.strip()) == 8 and \
            userprofile.expiry_date >= date.today()
 

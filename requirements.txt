@@ -10,7 +10,7 @@ google-auth-httplib2
 google-auth-oauthlib
 gunicorn
 httplib2
-idna
+idna==2.5
 oauthlib
 pyasn1
 pyasn1-modules
