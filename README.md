@@ -1,5 +1,31 @@
 # Frispel
 
+## Todo
+
+* Add start page text
+
+* Add about tab and text
+
+* Add rules tab and content
+
+* Make a temporary number of alowed bookings, until a specific date
+
+* Add a form for changing password for users.
+
+* Add an option under each user for manager to reset a users password to a static one. Make a check when users log in, if the hash is the same as the hash for the static password, and send the user directly to the change password prompt if it is.
+
+* Make sure users cant book with the static password enabled password
+
+* Create a log file system for prints
+
+* Add default marked checkbox to send mail about access
+
+* Add english
+
+* Change +- 6/12 months to add 6/12 months from today
+
+* Add external mail address to verify the mail sent to ltu
+
 ## Setup
 
 ### Virtual mashine

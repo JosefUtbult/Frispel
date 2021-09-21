@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Userprofile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     ltu_id = models.CharField(max_length=30)
     favorite_food = models.CharField(max_length=100)
 
@@ -13,7 +13,8 @@ class Userprofile(models.Model):
     bookings_allowed = models.IntegerField(default=1)
     extended_membership_status = models.BooleanField(default=False)
 
-    expiry_date = models.DateField(default=timezone.now)
+    application_expiry_date = models.DateField(default=timezone.now)
+    registered_expiry_date = models.DateField(default=timezone.now)
 
     def __str__(self):
         return self.user.username + ' profile'

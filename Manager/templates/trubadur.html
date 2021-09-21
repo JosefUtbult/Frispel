@@ -8,22 +8,36 @@
 </h1>
 {% if userprofiles|length > 0 %}
 {% with userprofiles|first as first %}
-<form method="post" class="col-8 ">
+<div class="row">
+	<div class="col-2"></div>
+	<div class="col-8 row">
+		<form method="post" class="p-4 col-6">
+	    	{% csrf_token %}
+			<input type="hidden" name="append" value="6m">
+			<input type="submit" value="Add 6 months" class="btn btn-secondary">
+		</form>
+		<form method="post" class="p-4 col-6">
+	    	{% csrf_token %}
+			<input type="hidden" name="append" value="12m">
+			<input type="submit" value="Add 12 months" class="btn btn-secondary">
+		</form>
+
+		<form method="post" class="col-12">
+			{% csrf_token %}
+	    	<div class="col-10">
+	    		<input type="date" name="date" value="{{ first.registered_expiry_date|date:'Y-m-d' }}" class="form-control">
+				<div class="py-2">
+            		<input type="submit" value="Set" class="btn btn-secondary btn-block"></form>
+        		</div>
+	    	</div>
+		</form>
+	</div>
+</div>
+
+
+<form method="post">
 {% csrf_token %}
-    <div class="form-group row my-4">
-        <div class="col-4">
-            <input type="submit" name="dateButton" value="-12" class="btn btn-secondary">
-            <input type="submit" name="dateButton" value="-6" class="btn btn-secondary">
-        </div>
-        <div class="col-4">
-            <input type="date" name="date" value="{{ first.expiry_date|date:'Y-m-d' }}" class="form-control">
-        </div>
-        <div class="col-4">
-            <input type="submit" name="dateButton" value="+6" class="btn btn-secondary">
-            <input type="submit" name="dateButton" value="+12" class="btn btn-secondary">
-        </div>
-    </div>
-    <div class="border py-2 my-4">
+        <div class="border py-2 my-4">
         {% for userprofile in userprofiles %}
         <div class="row">
             <div class="col-2"></div>
@@ -31,8 +45,7 @@
                 {{ userprofile.user.first_name }} {{ userprofile.user.last_name }}
             </div>
             <div class="col-2">
-                <input class="form-check-input" type="checkbox" name="{{ userprofile.user.username }}"
-                       {% if userprofile.trubadur_member %}checked{% endif %}>
+                <input class="form-check-input" type="checkbox" name="{{ userprofile.user.username }}" checked>
             </div>
         </div>
         <hr>
@@ -44,6 +57,6 @@
 </form>
 {% endwith %}
 {% else %}
-    <p>There are no trubarur members in the database.</p>
+    <p>There are no trubadur members in the database.</p>
 {% endif %}
 {% endblock %}

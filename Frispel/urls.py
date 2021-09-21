@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Content.urls')),
     path('', include('User.urls')),
-    path('manager', include('Manager.urls')),
-    path('calendar', include('GoogleCalendar.urls'))
+    path('manager/', include('Manager.urls')),
+    path('calendar/', include('GoogleCalendar.urls'))
 ]

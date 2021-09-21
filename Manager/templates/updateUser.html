@@ -7,27 +7,35 @@
 <h1 class="m-3">{{ currentUser.user.username }} - Update</h1>
 <div class="row">
 	<div class="col-2"></div>
-	<form method="post" class="col-8 ">
-	    {% csrf_token %}
-	    <div class="form-group row">
-	    	<div class="col-4">
-	    		<input type="submit" name="dateButton" value="-12" class="btn btn-secondary">
-	    		<input type="submit" name="dateButton" value="-6" class="btn btn-secondary">
+	<div class="col-8">	
+		<div class="row">
+			<form method="post" class="p-4 col-6">
+	    		{% csrf_token %}
+				<input type="hidden" name="append" value="6m">
+				<input type="submit" value="Add 6 months" class="btn btn-secondary">
+			</form>
+			<form method="post" class="p-4 col-6">
+	    		{% csrf_token %}
+				<input type="hidden" name="append" value="12m">
+				<input type="submit" value="Add 12 months" class="btn btn-secondary">
+			</form>
+		</div>
+
+		<form method="post">
+	    	{% csrf_token %}
+	    	<div class="form-group row">
+	    		<div class="col-12">
+	    			<input type="date" name="date" value="{{ currentUser.registered_expiry_date|date:'Y-m-d' }}" class="form-control">
+	    		</div>
 	    	</div>
-	    	<div class="col-4">
-	    		<input type="date" name="date" value="{{ currentUser.expiry_date|date:'Y-m-d' }}" class="form-control">
-	    	</div>
-	    	<div class="col-4">
-	    		<input type="submit" name="dateButton" value="+6" class="btn btn-secondary">
-	    		<input type="submit" name="dateButton" value="+12" class="btn btn-secondary">
-	    	</div>
-	    </div>
-	    {{ extended_user_form|crispy }}
-	    {{ userprofile_form|crispy }}
-	    {{ manager_userprofileform|crispy }}
-	    {{ manager_userform|crispy }}
-		<input type="submit" value="Set" class="btn btn-secondary">
-    </form>
+    	
+	    	{{ extended_user_form|crispy }}
+	    	{{ userprofile_form|crispy }}
+	    	{{ manager_userprofileform|crispy }}
+	    	{{ manager_userform|crispy }}
+			<input type="submit" value="Set" class="btn btn-secondary">
+    	</form>
+	</div>
 </div>
 {% endif %}
 {% endblock %}

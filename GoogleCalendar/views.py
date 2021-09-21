@@ -20,7 +20,7 @@ from User.models import Userprofile
 
 @login_required(login_url='login')
 def calendar(request):
-	if (not Userprofile.objects.get(user=request.user).extended_membership_status) and Userprofile.objects.get(user=request.user).expiry_date <= date.today():
+	if (not Userprofile.objects.get(user=request.user).extended_membership_status) and Userprofile.objects.get(user=request.user).registered_expiry_date <= date.today():
 		return redirect('notAMember')
 
 	# Checks if you want to book or unbook a block
