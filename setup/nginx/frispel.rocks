@@ -1,15 +1,29 @@
 server {
+    if ($host = www.frispel.rocks) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = frispel.rocks) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
 	listen 80;
 	listen [::]:80;
 	server_name frispel.rocks www.frispel.rocks;
 	return 302 https://$host$request_uri;
+
+
+
+
 }
 
 server {
 	listen 443 ssl http2;
 	listen [::]:443 ssl http2;
-	ssl_certificate /etc/ssl/frispel_cert.pem;
-	ssl_certificate_key /etc/ssl/frispel_key.pem;
+    ssl_certificate /etc/letsencrypt/live/frispel.rocks/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/frispel.rocks/privkey.pem; # managed by Certbot
 	server_name frispel.rocks www.frispel.rocks;
 	location / {
 		include /etc/nginx/mime.types;
@@ -19,4 +33,6 @@ server {
 	location /static/ {
 		root /var/www/frispel.rocks;
 	}
+
+
 }
