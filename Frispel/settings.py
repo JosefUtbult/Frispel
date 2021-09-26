@@ -28,7 +28,7 @@ with open('secret_key.txt', 'r') as key_file:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['130.240.200.252', 'frispel.rocks', '*.frispel.rocks']
 if DEBUG:

@@ -26,6 +26,8 @@
 
 * Add external mail address to verify the mail sent to ltu
 
+* Add week days to calendar
+
 ## Setup
 
 ### Virtual mashine
