@@ -19,9 +19,10 @@ from Manager import views
 
 urlpatterns = [
     path('', views.manager, name='manager'),
-    path('/maillist', views.maillist, name='maillist'),
-    path('/trubadur', views.trubadur, name='trubadur'),
-    path('/user/<str:username>', views.user, name='manageUser'),
-    path('/updateUser/<str:username>', views.updateUser, name='updateUser'),
-    path('/users', views.users, name='manageUsers'),
+    path('maillist', views.maillist, name='maillist'),
+    path('trubadur', views.trubadur, name='trubadur'),
+    path('user/<str:username>', views.user, name='manageUser'),
+    path('updateUser/<str:username>', views.updateUser, name='updateUser'),
+    path('users', views.users, name='manageUsers'),
+    path('register_access', views.register_access, name='register_access'),
 ]

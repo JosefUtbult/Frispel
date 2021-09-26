@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% if user.is_staff %}
+<h1 class="m-3">Register access</h1>
+{% if changed_userprofiles|length > 0 %}
+<h5>The following peoples access will be updated</h5> 
+
+<div class="container">
+	{% for userprofile in changed_userprofiles %}
+	<hr>
+	<div class="row">
+		<div class="col">
+			<p>
+				{{ userprofile.user.first_name }} {{ userprofile.user.last_name }}
+			</p>
+		</div>
+		<div class="col">
+			<p>
+				{{ userprofile.application_expiry_date }}	
+			</p>
+		</div>
+		<div>
+			<form method="post" class="col">
+	    		{% csrf_token %}
+				<input type="hidden" name="reset" value="{{ userprofile.user.username }}">
+				<input type="submit" value="Reset" class="btn btn-secondary">
+			</form>
+		</div>
+	</div>
+	{% endfor %}
+	
+	<h5 class="mt-5">The generated mail will look like this</h5>
+	<textarea rows="8" cols="50">
+TO: {{ mail.to }}
+CC: {% for instance in mail.cc %}{{ instance }} {% endfor %}
+--------------------------------
+{{ mail.title }}
+{{ mail.body }}
+	</textarea>
+</div>
+
+<div class="row m-4">
+	<div class="col-2"></div>
+	<form method="post" class="col-8">
+	    {% csrf_token %}
+		<input type="submit" value="Send" class="btn btn-secondary btn-block">
+	</form>
+</div>
+
+{% else %}
+<p>No changes made to any users expiry date</p>
+{% endif %}
+{% endif %}
+{% endblock %}

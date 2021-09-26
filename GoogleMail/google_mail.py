@@ -26,24 +26,6 @@ from datetime import date
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
-# Mail to the person responsible for adding access
-TO_MAIL = 'nicklas.lindgren@ltu.se'
-
-# Webmasters mail
-FROM_MAIL = 'frispel.webmaster@gmail.com'
-
-# Standard mail body to send to the access person
-MESSAGE_BODY = "Hej. Följande {person} behöver access till replokalen Frispel (Kultens lokal) " \
-               "fr.o.m. idag t.o.m. {date}:\n" \
-               "\n" \
-               "{names}\n" \
-               "\n" \
-               "Detta är ett autogenererat mail, så om någonting är fel får du gärna " \
-               "svara på det för att jag ska se det.\n" \
-               "Tack på förhand.\n" \
-               "\n" \
-               "Josef Utbult, Webbmaster/Kassör Frispel"
-
 
 def generate_service():
     # Uses a bunch of stuff. Don't really know
@@ -54,7 +36,13 @@ def generate_service():
         with open('token.pickle', 'rb') as token:
             creds = pickle.load(token)
 
-    return build('gmail', 'v1', credentials=creds)
+    service = build('gmail', 'v1', credentials=creds)
+    
+    if not creds.valid:
+        print("Credentials are invalid for this token. It needs to be re generated")
+
+    return service
+
 
 
 def create_message(sender, to, cc, subject, message_text):
@@ -84,33 +72,13 @@ def parse_userprofile(userprofile):
            userprofile.expiry_date >= date.today()
 
 
-def send_access_mail(userprofiles):
-    userprofiles = userprofiles[:] if type(userprofiles) is list else [userprofiles]
-    userprofiles = list(filter(parse_userprofile, userprofiles))
-    if len(userprofiles) == 0:
-        print(f"Unable to send access email: No correct userprofile")
-        return
+def send_access_mail(mail):
 
-    names = '\n'.join([f"\t{userprofile.user.first_name} {userprofile.user.last_name} ({userprofile.ltu_id})"
-                       for userprofile in userprofiles])
-
-    month = ['Januari',
-             'Februari',
-             'Mars', 'April',
-             'Maj', 'Juni', 'Juli',
-             'Augusti',
-             'September',
-             'Oktober',
-             'November',
-             'December'][userprofiles[0].expiry_date.month - 1]
-    date = f'{userprofiles[0].expiry_date.day} {month} {userprofiles[0].expiry_date.year}'
-
-    body = MESSAGE_BODY.format(person='person', date=date, names=names)
-    message = create_message(sender=FROM_MAIL,
-                             to=TO_MAIL,
-                             cc=[userprofile.user.email for userprofile in userprofiles],
-                             subject='Access Frispel',
-                             message_text=body)
+    message = create_message(sender=mail['from'],
+        to=mail['to'],
+        cc=mail['cc'],
+        subject=mail['title'],
+        message_text=mail['body'])
     send_message(service=generate_service(), message=message)
 
 
@@ -146,3 +114,17 @@ def generate_token():
         print('Labels:')
         for label in labels:
             print(label['name'])
+
+
+if __name__ == "__main__":
+    class moc_profile:
+        ltu_id = 'testes-4'
+        expiry_date = date.today()
+
+        class user:
+            first_name = 'Test'
+            last_name = 'Test'
+            email = 'josef.utbult@hotmail.com'
+
+
+    send_access_mail(moc_profile, debug=True)
