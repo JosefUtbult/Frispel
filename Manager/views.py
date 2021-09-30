@@ -45,13 +45,12 @@ MESSAGE_BODY = "Hej. Följande {person} behöver access till replokalen Frispel 
 
 @staff_member_required
 def manager(request):
-	return render(request, 'manager.html')
+	return render(request, 'manager.html', {'unapplied_access': get_unapplied_access()})
 
 
 @staff_member_required
 def maillist(request):
-	return render(request, 'mailList.html',
-				  {'adresses': sorted(dict.fromkeys([user.email.lower() for user in User.objects.all()]))})
+	return render(request, 'mailList.html', {'adresses': sorted(dict.fromkeys([user.email.lower() for user in User.objects.all()])), 'unapplied_access': get_unapplied_access()})
 
 
 @staff_member_required
@@ -77,7 +76,7 @@ def trubadur(request):
 
 
 	userprofiles = Userprofile.objects.filter(trubadur_member=True)
-	return render(request, 'trubadur.html', {'userprofiles': userprofiles})
+	return render(request, 'trubadur.html', {'userprofiles': userprofiles, 'unapplied_access': get_unapplied_access()})
 
 
 @staff_member_required
@@ -86,7 +85,7 @@ def users(request):
 	for userprofile in userprofiles:
 		userprofile.active = userprofile.registered_expiry_date > date.today()
 
-	return render(request, 'users.html', {'userprofiles': userprofiles})
+	return render(request, 'users.html', {'userprofiles': userprofiles, 'unapplied_access': get_unapplied_access()})
 
 
 @staff_member_required
@@ -96,7 +95,7 @@ def user(request, username):
 	except:
 		raise Http404("Poll does not exist")
 
-	return render(request, 'user.html', {'currentUser': userprofile})
+	return render(request, 'user.html', {'currentUser': userprofile, 'unapplied_access': get_unapplied_access()})
 
 
 @staff_member_required
@@ -139,10 +138,7 @@ def updateUser(request, username):
 		userprofile_form = UserprofileForm(instance=userprofile)
 		manager_userprofileform = ManagerprofileForm(instance=userprofile)
 
-	return render(request, 'updateUser.html', {'currentUser': userprofile, 'extended_user_form': extended_user_form,
-											   'manager_userform': manager_userform,
-											   'userprofile_form': userprofile_form,
-											   'manager_userprofileform': manager_userprofileform})
+	return render(request, 'updateUser.html', {'currentUser': userprofile, 'extended_user_form': extended_user_form, 'manager_userform': manager_userform, 'userprofile_form': userprofile_form, 'manager_userprofileform': manager_userprofileform, 'unapplied_access': get_unapplied_access()})
 
 
 @staff_member_required
@@ -164,7 +160,11 @@ def register_access(request):
 				userprofile.save()
 
 		changed_userprofiles = list(filter(lambda instance: instance.application_expiry_date != instance.registered_expiry_date, Userprofile.objects.all()))
-	return render(request, 'registerAccess.html', {'currentUser': 'userprofile', 'changed_userprofiles': changed_userprofiles, 'mail': generate_mail(changed_userprofiles)})
+	return render(request, 'registerAccess.html', {'changed_userprofiles': changed_userprofiles, 'mail': generate_mail(changed_userprofiles), 'unapplied_access': get_unapplied_access()})
+
+
+def get_unapplied_access():
+	return len(list(filter(lambda instance: instance.application_expiry_date != instance.registered_expiry_date, Userprofile.objects.all()))) > 0
 
 
 def generate_mail(userprofiles):

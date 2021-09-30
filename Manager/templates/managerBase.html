@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if unapplied_access %}
+<div class="alert alert-dark" role="alert">
+	You have unapplied access changes to users. Go to Register access to apply.
+</div>
+{% endif %}
+<div>
+{% block manager_content %}
+{% endblock %}
+</div>
+{% endblock %}
