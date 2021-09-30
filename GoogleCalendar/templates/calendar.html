@@ -9,10 +9,9 @@
 {% for current_date in date_list %}
 <hr>
 <div class="row">
-	<div class="col-md-6 d-flex justify-content-center">
-		<div>
-			<h3>{{ current_date.date|date:"d M Y" }}</h3>
-		</div>
+	<div class="col-md-6 row justify-content-center">
+		<h3 class="col-6">{{ current_date.date|date:"d M Y" }}</h3>
+		<h3 class="col=6">{{ current_date.date|date:"l" }}</h3>
 	</div>
 	<div class="col-md-6">
 		{% for block in current_date.block %}
