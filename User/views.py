@@ -21,7 +21,7 @@ from .forms import CustomUserForm, UserprofileForm
 from .models import Userprofile
 
 # Gives the login page, parses the form and redirects on successful login
-def login(request):
+def login(request, lang=None):
 
 	if request.method == 'POST':
 		form = {'username': request.POST.get('username'), 'password': request.POST.get('password')}
@@ -39,12 +39,12 @@ def login(request):
 	return render(request, 'login.html', {'form': form, 'result': '' if not request.method == 'POST' else 'Incorrect username or password'})
 
 # Runs the logout function and gives the logout page
-def logout(request):
+def logout(request, lang=None):
 	super_logout(request)
 	return render(request, 'logout.html')
 
 # Gives the sign up page and generates a user on successful 
-def signup(request):
+def signup(request, lang=None):
 
 	if request.method == 'POST':
 		# Generates the standard user creation form, an extended user form and a 
@@ -87,12 +87,12 @@ def signup(request):
 
 # The users account page
 @login_required(login_url='login')
-def account(request):
+def account(request, lang=None):
 	return render(request, 'account.html', {'userprofile': Userprofile.objects.get(user=request.user)})
 
 # The page for a user to update its userdata
 @login_required(login_url='login')
-def updateAccount(request):
+def updateAccount(request, lang=None):
 
 	if request.method == 'POST':
 		# Uses the extended user form and the userprofile form

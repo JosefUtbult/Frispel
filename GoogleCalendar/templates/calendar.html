@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'calenderStyle.css' %}">
 
-<h1 class="m-3">Calendar</h1>
+<h1 class="m-3">{% if lang == 'en' %}Calendar{% else %}Kalender{% endif %}</h1>
 
 {% for current_date in date_list %}
 <hr>

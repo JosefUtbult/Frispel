@@ -10,17 +10,17 @@
 	<div class="col-sm-3 col-1"></div>
 	<div class="col-sm-6 col-10">
 		<hr>
-		<form action="{% url 'manageUsers' %}" method="get" class="my-4">
-			<input type="submit" class="btn btn-primary btn-block" value="Users"/>
+		<form action="{% url 'manageUsers' %}lang={% if lang %}{{lang}}{% else %}sv{% endif %}" method="get" class="my-4">
+			<input type="submit" class="btn btn-primary btn-block" value="{% if lang == 'en' %}Users{% else %}Användare{% endif %}"/>
 		</form>
-		<form action="{% url 'maillist' %}" method="get" class="my-4">
-			<input type="submit" class="btn btn-primary btn-block" value="Mail list"/>
+		<form action="{% url 'maillist' %}lang={% if lang %}{{lang}}{% else %}sv{% endif %}" method="get" class="my-4">
+			<input type="submit" class="btn btn-primary btn-block" value="{% if lang == 'en' %}Mail List{% else %}Mail Lista{% endif %}"/>
 		</form>
-		<form action="{% url 'trubadur' %}" method="get" class="my-4">
+		<form action="{% url 'trubadur' %}lang={% if lang %}{{lang}}{% else %}sv{% endif %}" method="get" class="my-4">
 			<input type="submit" class="btn btn-secondary btn-block" value="Trubadur"/>
 		</form>
-		<form action="{% url 'register_access' %}" method="get" class="my-4">
-			<input type="submit" class="btn btn-secondary btn-block" value="Register Access"/>
+		<form action="{% url 'register_access' %}lang={% if lang %}{{lang}}{% else %}sv{% endif %}" method="get" class="my-4">
+			<input type="submit" class="btn btn-secondary btn-block" value="{% if lang == 'en' %}Register Access{% else %}Registrera Tillgång{% endif %}"/>
 		</form>
 	</div>
 </div>

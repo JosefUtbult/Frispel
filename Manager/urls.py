@@ -18,11 +18,18 @@ from django.urls import path, include
 from Manager import views
 
 urlpatterns = [
+    path('lang=<str:lang>', views.manager, name='manager'),
     path('', views.manager, name='manager'),
-    path('maillist', views.maillist, name='maillist'),
-    path('trubadur', views.trubadur, name='trubadur'),
-    path('user/<str:username>', views.user, name='manageUser'),
-    path('updateUser/<str:username>', views.updateUser, name='updateUser'),
-    path('users', views.users, name='manageUsers'),
-    path('register_access', views.register_access, name='register_access'),
+    path('maillist/lang=<str:lang>', views.maillist, name='maillist'),
+    path('maillist/', views.maillist, name='maillist'),
+    path('trubadur/lang=<str:lang>', views.trubadur, name='trubadur'),
+    path('trubadur/', views.trubadur, name='trubadur'),
+    path('user/<str:username>/lang=<str:lang>', views.user, name='manageUser'),
+    path('user/<str:username>/', views.user, name='manageUser'),
+    path('updateUser/<str:username>/lang=<str:lang>', views.updateUser, name='updateUser'),
+    path('updateUser/<str:username>/', views.updateUser, name='updateUser'),
+    path('users/lang=<str:lang>', views.users, name='manageUsers'),
+    path('users/', views.users, name='manageUsers'),
+    path('register_access/lang=<str:lang>', views.register_access, name='register_access'),
+    path('register_access/', views.register_access, name='register_access'),
 ]

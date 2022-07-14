@@ -12,12 +12,12 @@
 			<form method="post" class="p-4 col-6">
 	    		{% csrf_token %}
 				<input type="hidden" name="append" value="6m">
-				<input type="submit" value="Add 6 months" class="btn btn-secondary">
+				<input type="submit" value="{% if lang == 'en' %}Add 6 months{% else %}Lägg till 6 månader{% endif %}" class="btn btn-secondary">
 			</form>
 			<form method="post" class="p-4 col-6">
 	    		{% csrf_token %}
 				<input type="hidden" name="append" value="12m">
-				<input type="submit" value="Add 12 months" class="btn btn-secondary">
+				<input type="submit" value="{% if lang == 'en' %}Add 12 months{% else %}Lägg till 12 månader{% endif %}" class="btn btn-secondary">
 			</form>
 		</div>
 
@@ -33,7 +33,7 @@
 	    	{{ userprofile_form|crispy }}
 	    	{{ manager_userprofileform|crispy }}
 	    	{{ manager_userform|crispy }}
-			<input type="submit" value="Set" class="btn btn-secondary">
+			<input type="submit" value="{% if lang == 'en' %}Set{% else %}Sätt{% endif %}" class="btn btn-secondary">
     	</form>
 	</div>
 </div>

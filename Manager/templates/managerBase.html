@@ -3,7 +3,8 @@
 
 {% if unapplied_access %}
 <div class="alert alert-dark" role="alert">
-	You have unapplied access changes to users. Go to Register access to apply.
+	{% if lang == 'en' %}You have unapplied access changes to users. Go to Register access to apply.{% else %}
+	Du har ändringar för tillgång av lokalen som inte har registrerats. Gå till Registrera Tillgång för att applicera ändringar.{% endif %}
 </div>
 {% endif %}
 <div>

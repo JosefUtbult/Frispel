@@ -8,4 +8,4 @@ static_export/
 *.sock
 **/__pycache__/**
 *.pyc
-.idea
+.idea/

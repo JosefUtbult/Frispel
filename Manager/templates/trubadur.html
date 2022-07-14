@@ -14,12 +14,12 @@
 		<form method="post" class="p-4 col-6">
 	    	{% csrf_token %}
 			<input type="hidden" name="append" value="6m">
-			<input type="submit" value="Add 6 months" class="btn btn-secondary">
+			<input type="submit" value="{% if lang == 'en' %}Add 6 months{% else %}Lägg till 6 måndare{% endif %}" class="btn btn-secondary">
 		</form>
 		<form method="post" class="p-4 col-6">
 	    	{% csrf_token %}
 			<input type="hidden" name="append" value="12m">
-			<input type="submit" value="Add 12 months" class="btn btn-secondary">
+			<input type="submit" value="{% if lang == 'en' %}Add 12 months{% else %}Lägg till 12 månader{% endif %}" class="btn btn-secondary">
 		</form>
 
 		<form method="post" class="col-12">
@@ -27,7 +27,7 @@
 	    	<div class="col-10">
 	    		<input type="date" name="date" value="{{ first.registered_expiry_date|date:'Y-m-d' }}" class="form-control">
 				<div class="py-2">
-            		<input type="submit" value="Set" class="btn btn-secondary btn-block"></form>
+            		<input type="submit" value="{% if lang == 'en' %}Set{% else %}Sätt{% endif %}" class="btn btn-secondary btn-block"></form>
         		</div>
 	    	</div>
 		</form>
@@ -51,12 +51,12 @@
         <hr>
         {% endfor %}
         <div class="px-4">
-            <input type="submit" value="Set" class="btn btn-secondary btn-block"></form>
+            <input type="submit" value="{% if lang == 'en' %}Set{% else %}Sätt{% endif %}" class="btn btn-secondary btn-block"></form>
         </div>
     </div>
 </form>
 {% endwith %}
 {% else %}
-    <p>There are no trubadur members in the database.</p>
+    <p>{% if lang == 'en' %}There are no Trubadur members in the database.{% else %}Det finns inga Trubadurmedlemmar i databasen.{% endif %}</p>
 {% endif %}
 {% endblock %}

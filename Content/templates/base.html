@@ -8,8 +8,8 @@
 
 	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 	<script type="text/javascript" src="{% static 'script.js' %}"></script>
@@ -24,55 +24,59 @@
 </div>
 
 <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top bg-frispel-dark pb-0">
-<a class="navbar-brand" href="/">
+	<a class="navbar-brand" href="/lang={% if lang %}{{lang}}{% else %}sv{% endif %}">
 	<img class="logo mx-2 d-inline-block" src="{% static 'logo.png' %}">
 	<h1 class="mx-2 d-inline-block title">Frispel</h1>
 </a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span>
 </button>
-
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	<ul class="navbar-nav mr-auto">
 		<li class="nav-item">
-			<a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+			<a class="nav-link" href="/lang={% if lang %}{{lang}}{% else %}sv{% endif %}">{% if lang == 'en' %}Home{% else %}Hem{% endif %}<span class="sr-only">(current)</span></a>
 		</li>
 		{% if user.is_authenticated %}
 		<li class="nav-item">
-			<a class="nav-link" href="{% url 'calendar' %}">Book</a>
+			<a class="nav-link" href="{% url 'calendar' %}lang={% if lang %}{{lang}}{% else %}sv{% endif %}">{% if lang == 'en' %}Book{% else %}Boka{% endif %}</a>
 		</li>
 		{% if user.is_staff %}
 		<li class="nav-item">
-			<a class="nav-link" href="{% url 'manager' %}">Manager</a>
+			<a class="nav-link" href="{% url 'manager' %}lang={% if lang %}{{lang}}{% else %}sv{% endif %}">Manager</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="{% url 'manageUsers' %}">Users</a>
+			<a class="nav-link" href="{% url 'manageUsers' %}lang={% if lang %}{{lang}}{% else %}sv{% endif %}">{% if lang == 'en' %}Users{% else %}Användare{% endif %}</a>
 		</li>
 		{% endif %}
 		{% endif %}
 	</ul>
 
 	<ul class="nav navbar-nav button-navbar float-none">
+		<li>
+			<form action="lang={% if lang == 'en'%}sv{% else %}en{% endif %}" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">
+				<input type="submit" class="btn btn-primary" value="{% if lang == 'en' %}Svenska{% else %}English{% endif %}"></input>
+			</form>
+		</li>
 		{% if user.is_authenticated %}
 		<li>
-			<form action="/account" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">
+			<form action="/account/lang={% if lang %}{{lang}}{% else %}sv{% endif %}" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">
 				<input type="submit" class="btn btn-primary" value="{{ user.username }}"></input>
 			</form>
 		</li>
 		<li>
-			<form action="/logout" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">
-				<input type="submit" class="btn btn-primary" value="Logout"></input>
+			<form action="/logout/lang={% if lang %}{{lang}}{% else %}sv{% endif %}" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">
+				<input type="submit" class="btn btn-primary" value="{% if lang == 'en' %}Logout{% else %}Logga ut{% endif %}"></input>
 			</form>
 		</li>
 		{% else %}
 		<li>
-			<form action="/signup" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">
-				<input type="submit" class="btn btn-primary" value="Sign up"></input>
+			<form action="/signup/lang={% if lang %}{{lang}}{% else %}sv{% endif %}" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">
+				<input type="submit" class="btn btn-primary" value="{% if lang == 'en' %}Sign up{% else %}Skapa konto{% endif %}"></input>
 			</form>
 		</li>
 		<li>
-			<form action="/login" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">
-				<input type="submit" class="btn btn-primary" value="Login"></input>
+			<form action="/login/lang={% if lang %}{{lang}}{% else %}sv{% endif %}" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">
+				<input type="submit" class="btn btn-primary" value="{% if lang == 'en' %}Login{% else %}Logga in{% endif %}"></input>
 			</form>
 		</li>
 		{% endif %}
@@ -90,11 +94,11 @@
 
 		{% if messages %}
 		<ul class="messages">
-		    {% for message in messages %}
-		    <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
-		        {{ message }}
-		    </li>
-		    {% endfor %}
+			{% for message in messages %}
+			<li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+				{{ message }}
+			</li>
+			{% endfor %}
 		</ul>
 		{% endif %}
 
@@ -107,9 +111,9 @@
 
 <footer class="footer">
 	<div class="container b- f0ont-small frispel-gray p-3 text-center text-lg-left">
-		<h5>Contact</h5>
-		<h6>Chairman: <a href="mailto:frispel.ordforande@gmail.com" class="link-unstyled">frispel.ordforande@gmail.com</a></h6>
-		<h6>Cashier: <a href="mailto:frispel.ordforande@gmail.com" class="link-unstyled">frispel.kassor@gmail.com</a></h6>
+		<h5>{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</h5>
+		<h6>{% if lang == 'en' %}Chairman{% else %}Ordförande{% endif %}: <a href="mailto:frispel.ordforande@gmail.com" class="link-unstyled">frispel.ordforande@gmail.com</a></h6>
+		<h6>{% if lang == 'en' %}Cashier{% else %}Kassör{% endif %}: <a href="mailto:frispel.ordforande@gmail.com" class="link-unstyled">frispel.kassor@gmail.com</a></h6>
 	</div>
 </footer>
 </body>

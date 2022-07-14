@@ -3,13 +3,13 @@
 {% load crispy_forms_tags %}
 {% block manager_content %}
 
-<h1 class="m-3">Users</h1>
+<h1 class="m-3">{% if lang == 'en' %}Users{% else %}Användare{% endif %}</h1>
 
 <div class="container">
 	<div class="row">
-		<div class="col"><h5>Username</h5></div>
-		<div class="col"><h5>Name</h5></div>
-		<div class="col"><h5>Membership status</h5></div>
+		<div class="col"><h5>{% if lang == 'en' %}Username{% else %}Användarnamn{% endif %}</h5></div>
+		<div class="col"><h5>{% if lang == 'en' %}Name{% else %}Namn{% endif %}</h5></div>
+		<div class="col"><h5>{% if lang == 'en' %}Membership status{% else %}Medlemskapsstatus{% endif %}</h5></div>
 	</div>
 
 	{% for userprofile in userprofiles %}

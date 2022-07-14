@@ -4,9 +4,9 @@
 {% block manager_content %}
 
 {% if user.is_staff %}
-<h1 class="m-3">Register access</h1>
+<h1 class="m-3">{% if lang == 'en' %}Register access{% else %}Registrera tillgång{% endif %}</h1>
 {% if changed_userprofiles|length > 0 %}
-<h5>The following peoples access will be updated</h5> 
+<h5>{% if lang == 'en' %}The following peoples access will be updated{% else %}Följande personers tillgång kommer att uppdateras{% endif %}</h5> 
 
 <div class="container">
 	{% for userprofile in changed_userprofiles %}
@@ -32,7 +32,7 @@
 	</div>
 	{% endfor %}
 	
-	<h5 class="mt-5">The generated mail will look like this</h5>
+	<h5 class="mt-5">{% if lang == 'en' %}The generated mail will look like this{% else %}Det autogenererade mailet kommer se ut såhär{% endif %}</h5>
 	<textarea rows="8" cols="50">
 TO: {{ mail.to }}
 CC: {% for instance in mail.cc %}{{ instance }} {% endfor %}
@@ -51,7 +51,7 @@ CC: {% for instance in mail.cc %}{{ instance }} {% endfor %}
 </div>
 
 {% else %}
-<p>No changes made to any users expiry date</p>
+<p>{% if lang == 'en' %}No changes made to any users expiry date{% else %}Inga ändringar av användares tillgång har ändrats{% endif %}</p>
 {% endif %}
 {% endif %}
 {% endblock %}
