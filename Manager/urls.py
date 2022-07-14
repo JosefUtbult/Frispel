@@ -32,6 +32,9 @@ urlpatterns = [
     path('users/', views.users, name='manageUsers'),
     path('register_access/lang=<str:lang>', views.register_access, name='register_access'),
     path('register_access/', views.register_access, name='register_access'),
+<<<<<<< HEAD
     path('remove_inactive_users/', views.remove_inactive_users, name='remove_inactive_users'),
     path('remove_inactive_users/lang=<str:lang>', views.remove_inactive_users, name='remove_inactive_users'),
+=======
+>>>>>>> 3d8725f (Add english/swedish languages)
 ]
