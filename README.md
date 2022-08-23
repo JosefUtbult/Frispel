@@ -40,7 +40,7 @@
 
 ```bash 
 sudo apt update -y && sudo apt upgrade -y
-sudo apt install -y nginx python3-pip python3-venv uwsgi uwsgi-plugin-python3 certbot python3-certbot-nginx
+sudo apt install -y nginx python3-pip python3-venv uwsgi uwsgi-plugin-python3 certbot python3-certbot-nginx python3-venv
 ```
 
 ### Hämta repot
