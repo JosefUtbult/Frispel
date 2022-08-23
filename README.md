@@ -98,6 +98,7 @@ sudo ln -s /home/frispel/Frispel/setup/nginx/frispel.rocks /etc/nginx/sites-enab
 * Använd certbot
 
 ```bash
+grep -R /etc/letsencrypt/live/frispel.rocks/fullchain.pem /etc/nginx/
 sudo certbot --nginx
 ```
 
