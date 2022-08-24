@@ -6,6 +6,8 @@ secret_key.txt
 db.sqlite3
 static_export/
 *.sock
+User/migrations/__pycache__/
+**/__pycache__/
 **/__pycache__/**
 *.pyc
 .idea/
