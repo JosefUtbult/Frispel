@@ -40,7 +40,7 @@
 
 ```bash 
 sudo apt update -y && sudo apt upgrade -y
-sudo apt install -y nginx python3-pip python3-venv uwsgi uwsgi-plugin-python3 certbot python3-certbot-nginx
+sudo apt install -y nginx python3-pip python3-venv uwsgi uwsgi-plugin-python3 certbot python3-certbot-nginx python3-venv
 ```
 
 ### Hämta repot
@@ -98,6 +98,7 @@ sudo ln -s /home/frispel/Frispel/setup/nginx/frispel.rocks /etc/nginx/sites-enab
 * Använd certbot
 
 ```bash
+grep -R /etc/letsencrypt/live/frispel.rocks/fullchain.pem /etc/nginx/
 sudo certbot --nginx
 ```
 
