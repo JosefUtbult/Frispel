@@ -205,3 +205,23 @@ def generate_mail(userprofiles):
                 'title': 'Access to frispel', 
                 'body': MESSAGE_BODY.format(person='person', body=body)
             }
+
+def get_inactive_users():
+    return list(filter(lambda instance: 
+        # Change timedelta to 365 when the initial set date is more than one year ago
+        instance.registered_expiry_date + timedelta(days=300) <= date.today() and
+        not instance.extended_membership_status, 
+    Userprofile.objects.all()))
+
+
+@staff_member_required
+def remove_inactive_users(request, lang=None):
+    if request.method == 'POST':
+        inactive_users = get_inactive_users()
+        print(request.POST)
+        for userprofile in inactive_users:
+            if userprofile.user.username in request.POST:
+                userprofile.user.delete()
+
+    inactive_users = get_inactive_users()
+    return render(request, 'remove_inactive_users.html', {'inactive_users': inactive_users, 'lang': lang})

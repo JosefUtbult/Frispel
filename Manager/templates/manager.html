@@ -22,6 +22,9 @@
 		<form action="{% url 'register_access' %}lang={% if lang %}{{lang}}{% else %}sv{% endif %}" method="get" class="my-4">
 			<input type="submit" class="btn btn-secondary btn-block" value="{% if lang == 'en' %}Register Access{% else %}Registrera Tillgång{% endif %}"/>
 		</form>
+		<form action="{% url 'remove_inactive_users' %}lang={% if lang %}{{lang}}{% else %}sv{% endif %}" method="get" class="my-4">
+			<input type="submit" class="btn btn-secondary btn-block" value="{% if lang == 'en' %}Remove Inactive Users{% else %}Ta bort inaktiva användare{% endif %}"/>
+		</form>
 	</div>
 </div>
 {% endblock %}
