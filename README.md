@@ -22,21 +22,28 @@
 
 ## Setup
 
+Använd guider från digitalocean. [Set up Nginx](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04) och [Set up Django with NginX](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04)
+
 ### Virtual mashine
 
-* Skapa en virtuell maskin på [DUST](https://dust.ludd.ltu.se/cloud/dashboard).
+Skapa en virtuell maskin på [DUST](https://dust.ludd.ltu.se/cloud/dashboard). Sätt OS till Ubuntu 20.04 LTS och storlek 
+till Large. Döp den till _frispel-rocks_.
 
-* Assigna den statisk IP.
+Assigna den statiska IPn `130.240.202.215`.
 
-* Spara undan det temporära SSH lösenordet.
+Spara undan det temporära SSH lösenordet.
 
 ### På maskinen
 
-* SSHa in med användaren frispel och det temporära lösenordet.
+SSHa in med användaren frispel och det temporära lösenordet.
 
-* Byt lösenord med `passwd`
+```
+ssh frispel@130.240.202.215
+```
 
-* Installera nginx och pip
+Byt lösenord med `passwd` till det sparat i lösenordshanteraren
+
+Installera nginx och pip
 
 ```bash 
 sudo apt update -y && sudo apt upgrade -y
