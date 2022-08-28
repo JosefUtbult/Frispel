@@ -21,5 +21,7 @@ urlpatterns = [
     path('lang=<str:lang>', views.home, name='home'),
     path('', views.home, name='home'),
     path('notAMember/lang=<str:lang>', views.notAMember, name='notAMember'),
-    path('notAMember', views.notAMember, name='notAMember'),
+    path('notAMember/', views.notAMember, name='notAMember'),
+    path('becomeAMember/lang=<str:lang>', views.becomeAMember, name='becomeAMember'),
+    path('becomeAMember/', views.becomeAMember, name='becomeAMember'),
 ]

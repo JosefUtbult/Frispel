@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="document">
+    <h1>Bli medlem</h1>
+    <p>Hej, och välkommen till Frispel!</p>
+    <p>För att bli medlem behöver du fullfölja följande steg.</p>
+    <ol>
+        <li>
+            Skapa en användare på denna sida. Här krävs det att du fyller i ditt <i>LTU ideal</i> 
+            på formen <i>xxxxxx-n</i>. Om du inte har ett ideal, FYLL INTE I ETT ICKE-EXISTERANDE 
+            IDEAL. Kontakta i så fall styrelsen.
+        </li>
+        <li>
+            Betala medlemsavgiften på 500 kr för ett års medlemskap, eller 300 kr för ett halvårs 
+            medlemskap (om inte en annan avgift specificerats). Denna avgift ska betalas in till
+            postgironummer 713632-8. Vänligen skriv ditt namn i meddelandet på överföringen.
+            Om du inte kan betala in till postgirot, kontakta styrelsen så löser vi ett annat sätt
+            för dig att betala avgiften.
+        </li>
+        <li>
+            Skriv under vårt <a href="{% static 'documents/MembershipAgreement.pdf' %}">medlemsavtal</a>,
+            som inkluderar att våra <a href="{% static 'documents/RulesOfProcedure.pdf' %}">ordningsregler</a>
+            följs. Du kan antingen få ett avtal att skriva på från styrelsen, eller skriva ut ett själv 
+            <a href="{% static 'documents/MembershipAgreement.pdf' %}">här</a>. Efter att du skrivit på
+            kan du antingen skanna in avtalet själv och skicka det till styrelsen, eller kontakta oss för
+            att lämna det i person.
+        </li>
+        <li>
+            Kontakta styrelsen och meddela oss att du fullföljt föregående steg. Efter det kommer vi att
+            aktivera ditt konto och du kommer få möjlighet att boka lokalen.
+        </li>
+    </ol>
+    <h2>Kontakta styrelsen</h2>
+    <p>
+        För att kontakta styrelsen kan du antingen skicka ett email till frispel.ordforande@gmail.com,
+        eller skriva till vår <a href="https://www.facebook.com/LTUFrispel">facebooksida</a>.
+        Om något känns oklart svarar vi gärna på dina frågor.
+    </p>
+</div>
+{% endblock %}

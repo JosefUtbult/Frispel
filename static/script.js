@@ -6,13 +6,16 @@ $( document ).ready(function() {
 	// Display and remove header on scroll
     var position = $(window).scrollTop(); 
 	$(window).scroll(function() {
-	    var scroll = $(window).scrollTop();
-	    if(scroll > position) {
-	        $("#navbar").fadeOut(200);
-	    } else {
-	        $("#navbar").fadeIn(200);
-	    }
-	    position = scroll;
+		// Don't hide scroll for mobile applications
+		if($(window).width() > 991) {
+			var scroll = $(window).scrollTop();
+			if(scroll > position) {
+				$("#navbar").fadeOut(200);
+			} else {
+				$("#navbar").fadeIn(200);
+			}
+			position = scroll;
+		}
 	});
 
 });

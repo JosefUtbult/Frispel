@@ -9,6 +9,26 @@
     --frispel-shadow-red:#8c2921;
 }
 
+h1, h2, h3, h4, h5, h6, p, strong, label, li, small {
+	color: var(--frispel-gray);	
+    font-family: 'Inria Serif', serif;
+}
+
+a {
+	color: var(--frispel-gray) !important;
+	text-decoration: underline !important;
+}
+
+a:hover {
+	color: var(--frispel-red) !important;
+
+}
+
+#navbar a {
+	color: var(--frispel-light-gray) !important;
+	text-decoration: none !important;
+}
+
 .bodycontainter {
 	min-height: 100vh;
 }
@@ -27,17 +47,12 @@
 	height: 1px;
 }
 
-h1, h2, h3, h4, h5, h6, p, strong, label, li, small {
-	color: var(--frispel-gray);	
-    font-family: 'Inria Serif', serif;
-}
-
 .btn {
     font-family: 'Kulim Park', sans-serif;
 }
 
-.nav-link, .link-unstyled{
-	color: inherit; !important;
+.nav-link, .link-unstyled {
+	color: inherit !important;
     font-family: 'Kulim Park', sans-serif;
 
     text-decoration: none;
@@ -49,7 +64,7 @@ h1, h2, h3, h4, h5, h6, p, strong, label, li, small {
 }
 
 .nav-link:hover, .link-unstyled:hover {
-	color: inherit; !important;
+	color: inherit !important;
     text-decoration: none;
 }
 
@@ -137,7 +152,7 @@ h1, h2, h3, h4, h5, h6, p, strong, label, li, small {
 
 .img-fluid-container > h1 {
 	background-color: transparent;
-	color: white;
+	color: white !important;
 
 	text-shadow: none;
     transition: text-shadow 0.2s ease;
@@ -156,13 +171,13 @@ footer {
 }
 
 footer h1, footer h2, footer h2, footer h3, footer h4, footer h5, footer h6, footer p {
-	color: white;
+	color: white !important;
     font-family: 'Kulim Park', sans-serif;
 
 }
 
 .primary h1, .primary h2, .primary h3, .primary h4, .primary h5, .primary h6, .primary p, .primary strong, .primary label, .primary li, .primary small{
-	color: white;
+	color: white !important;
 }
 
 .btn-primary, .primary {
@@ -197,4 +212,8 @@ footer h1, footer h2, footer h2, footer h3, footer h4, footer h5, footer h6, foo
 
 .calenderColumn {
 	
+}
+
+.document {
+	text-align: start;
 }

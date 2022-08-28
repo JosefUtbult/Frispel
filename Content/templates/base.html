@@ -49,6 +49,15 @@
 		</li>
 		{% endif %}
 		{% endif %}
+		<li class="nav-item">
+			<a class="nav-link" href="{% url 'becomeAMember' %}lang={% if lang %}{{lang}}{% else %}sv{% endif %}">{% if lang == 'en' %}Become a member{% else %}Bli medlem{% endif %}</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="{% static 'documents/MembershipAgreement.pdf' %}">{% if lang == 'en' %}Membership agreement{% else %}Medlemsavtal{% endif %}</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="{% static 'documents/RulesOfProcedure.pdf' %}">{% if lang == 'en' %}Rules of procedure{% else %}Ordningsregler{% endif %}</a>
+		</li>
 	</ul>
 
 	<ul class="nav navbar-nav button-navbar float-none">
