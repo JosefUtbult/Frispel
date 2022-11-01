@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cas_ng',
     'crispy_forms',
     'Content',
     'User',
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', # add this line
+    'django_cas_ng.middleware.CASMiddleware',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -142,3 +144,15 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# CAS configuration
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'django_cas_ng.backends.CASBackend',
+)
+
+CAS_SERVER_URL = 'https://weblogon.ltu.se/cas/login'
+CAS_VERSION = '3'
+CAS_REDIRECT_URL = '/createUser'
+CAS_IGNORE_REFERER=True
+CAS_APPLY_ATTRIBUTES_TO_USER = True
