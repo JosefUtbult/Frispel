@@ -43,6 +43,18 @@ def logout(request, lang=None):
 	super_logout(request)
 	return render(request, 'logout.html')
 
+# Is called by the CAS. If this user already has logged in and created a user profile, redirect to home
+def createUser(request, lang=None):
+    userprofile, created = Userprofile.objects.get_or_create(user=request.user)
+    
+    if not created:
+        if lang:
+            return redirect('home', lang=lang)
+        else:
+            return redirect('home')
+
+    return render(request, 'redirect.html', {'userprofile': userprofile, 'created': created})
+
 # Gives the sign up page and generates a user on successful 
 def signup(request, lang=None):
 

@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from User import views as user_views
+import django_cas_ng.views
 
 urlpatterns = [
-    path('login/lang=<str:lang>', user_views.login, name='login'),
-    path('login/', user_views.login, name='login'),
-    path('logout/lang=<str:lang>', user_views.logout, name='logout'),
-    path('logout/', user_views.logout, name='logout'),
+    path('login/', django_cas_ng.views.LoginView.as_view(), name='cas_ng_login'),
+    path('logout/', django_cas_ng.views.LogoutView.as_view(), name='cas_ng_logout'),
+    path('createUser/lang=<str:lang>', user_views.createUser, name='createUser'),
+    path('createUser/', user_views.createUser, name='createUser'),
     path('account/lang=<str:lang>', user_views.account, name='account'),
     path('account/', user_views.account, name='account'),
     path('account/update/lang=<str:lang>', user_views.updateAccount, name='updateAccount'),
