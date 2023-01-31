@@ -17,9 +17,14 @@ from datetime import datetime, date, timedelta
 from .dateparser import *
 from .google_handler import book_block, unbook_block
 from User.models import Userprofile
+from User.views import check_set_up
 
 @login_required(login_url='login')
 def calendar(request, lang=None):
+    is_setup = check_set_up(request, lang)
+    if is_setup != True:
+        return is_setup
+
     if (not Userprofile.objects.get(user=request.user).extended_membership_status) and Userprofile.objects.get(user=request.user).registered_expiry_date <= date.today():
         return redirect('notAMember')
 

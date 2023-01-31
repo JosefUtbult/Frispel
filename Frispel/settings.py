@@ -153,6 +153,6 @@ AUTHENTICATION_BACKENDS = (
 
 CAS_SERVER_URL = 'https://weblogon.ltu.se/cas/login'
 CAS_VERSION = '3'
-CAS_REDIRECT_URL = '/createUser'
+CAS_REDIRECT_URL = '/redirect'
 CAS_IGNORE_REFERER=True
 CAS_APPLY_ATTRIBUTES_TO_USER = True

@@ -122,7 +122,6 @@ def updateUser(request, username, lang=None):
                 userprofile.user.is_staff = manager_userform.cleaned_data.get("is_staff")
                 userprofile.user.save()
 
-                userprofile.ltu_id = userprofile_form.cleaned_data.get("ltu_id")
                 userprofile.favorite_food = userprofile_form.cleaned_data.get("favorite_food")
                 userprofile.bookings_allowed = manager_userprofileform.cleaned_data.get("bookings_allowed")
                 userprofile.trubadur_member = manager_userprofileform.cleaned_data.get("trubadur_member")
@@ -193,7 +192,7 @@ def generate_mail(userprofiles):
     for instance in date_set:
         body += f"\nFöljande {'personer' if len(date_set[instance]) > 1 else 'person'} behöver acces t.o.m {instance.day} {month[instance.month - 1]} {instance.year}:\n"
         for userprofile in date_set[instance]:
-            body += f"\t{userprofile.user.first_name} {userprofile.user.last_name} ({userprofile.ltu_id.lower()})\n"
+            body += f"\t{userprofile.user.first_name} {userprofile.user.last_name} ({userprofile.user.username})\n"
 
     cc = [instance.user.email for instance in userprofiles] if not settings.DEBUG else []
     cc += [FROM_MAIL]

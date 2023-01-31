@@ -17,12 +17,11 @@ class CustomUserForm(forms.ModelForm):
 
 class UserprofileForm(forms.ModelForm):
 
-	ltu_id = forms.CharField(label='LTU-ID', max_length=100, required=False, help_text="This is required for access into Frispel. If you don't have an LTU ID, leave this blank and contact the chairman of Frispel for more information. Do not add an invalid LTU id!")
 	favorite_food = forms.CharField(label='Favorite food', max_length=100, required=True)
 
 	class Meta:
 		model = Userprofile
-		fields = ('ltu_id', 'favorite_food')
+		fields = ('favorite_food',)
 
 class Manageruserform(forms.ModelForm):
 

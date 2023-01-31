@@ -79,13 +79,8 @@
 		</li>
 		{% else %}
 		<li>
-			<form action="/signup/lang={% if lang %}{{lang}}{% else %}sv{% endif %}" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">
-				<input type="submit" class="btn btn-primary" value="{% if lang == 'en' %}Sign up{% else %}Skapa konto{% endif %}"></input>
-			</form>
-		</li>
-		<li>
 			<form action="/login" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">
-				<input type="submit" class="btn btn-primary" value="{% if lang == 'en' %}Login{% else %}Logga in{% endif %}"></input>
+				<input type="submit" class="btn btn-primary" value="{% if lang == 'en' %}Login/Sign Up{% else %}Logga in/Skapa Användare{% endif %}"></input>
 			</form>
 		</li>
 		{% endif %}

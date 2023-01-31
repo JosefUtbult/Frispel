@@ -210,10 +210,20 @@ footer h1, footer h2, footer h2, footer h3, footer h4, footer h5, footer h6, foo
    box-shadow: 2px 2px var(--frispel-shadow-gray) !important;
 }
 
-.calenderColumn {
-	
-}
-
 .document {
 	text-align: start;
+}
+
+.message {
+	--border-width: 5px;
+	margin: calc(10px + var(--border-width)) calc(50px + var(--border-width));
+	padding: calc(10px + var(--border-width));
+	background-color: var(--frispel-red);
+	border: solid rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+	font-size: x-large;
+}
+
+.message p, .message strong {
+	color: white;
 }

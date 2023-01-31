@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 
 class Userprofile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    ltu_id = models.CharField(max_length=30)
+    is_set_up = models.BooleanField(default=False)
+
     favorite_food = models.CharField(max_length=100)
 
     trubadur_member = models.BooleanField(default=False)

@@ -10,8 +10,6 @@
 	<div class="col-6">
 		<form action="{% url 'signup' %}" method="post">
 		    {% csrf_token %}
-		    {{ user_form|crispy }}
-		    <hr>
 		    <h5 class="m-3">{% if lang == 'en' %}Tell us a little more about yourself{% else %}Berätta lite mer om dig själv{% endif %}</h5>
 		    {{ extended_user_form|crispy }}
 		    {{ userprofile_form|crispy }}
