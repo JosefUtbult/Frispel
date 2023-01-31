@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="document">
+    <h1>Become a member</h1>
+    <p>Hello, and welcome to Frispel!</p>
+    <p>To become a member in Frispel you need to do the following.</p>
+    <ol>
+        <li>
+            Create an account at this site. This will require you to fill in your 
+            <i>LTU Student Ideal</i> in the format <i>xxxxxx-n</i>. If you don't have an ideal,
+            DONT FILL IN A NONE EXISTING ONE. In this case, contact the board and we'll go through what
+            you need to do to get one.
+        </li>
+        <li>
+            Pay the membership fee of 500 kr for a years membership or 300 kr for 
+            half a years membership (if not another fee has been specified). This fee needs to be paid 
+            to our postal giro number 713632-8. Please write your name in the text field on your payment. 
+            If you aren't able to pay via postal giro, contact the board and we'll figure out another 
+            means of payment.
+        </li>
+        <li>
+            Sign our <a href="{% static 'documents/MembershipAgreement.pdf' %}">membership agreement</a>, which 
+            includes an agreement to follow our 
+            <a href="{% static 'documents/RulesOfProcedure.pdf' %}">rules of procedure</a>. You can get a physical
+            document by contacting the board, or print one yourself from 
+            <a href="{% static 'documents/MembershipAgreement.pdf' %}">here</a>. After signing, you can scan it 
+            yourself and send it to the board, or contact the board to leave it to us in person.
+        </li>
+        <li>
+            Contact the board and tell us that you've done the previous steps. Then we will activate your 
+            account and you will get access to book our music room.
+        </li>
+    </ol>
+    <h2>Contact the board</h2>
+    <p>
+        If you need to contact the board, feel free either email us on frispel.ordforande@gmail.com,
+        or message us at our <a href="https://www.facebook.com/LTUFrispel">facebook page</a>. If any of
+        these steps is unclear, don't hesitate to write to us.
+    </p>
+</div>
+{% endblock %}

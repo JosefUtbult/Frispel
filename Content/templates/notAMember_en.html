@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="document">
+    <h1>Your membership is inactive</h1>
+    <p>
+        Either you are a new member to Frispel, or your membership has expired. To renew or activate your 
+        membership, follow our <a href={% url 'becomeAMember' %}>become a member</a> guide.</p>
+
+    <p>
+        If you've already payed and signed the membership agreement, and still hasn't received your membership 
+        status in a couple of days, or have any other questions regarding payment, message Frispels cashier at 
+        frispel.kassor@gmail.com
+    </p>
+</div>
+
+{% endblock %}

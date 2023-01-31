@@ -18,15 +18,7 @@
 
 * Create a log file system for prints
 
-* Add default marked checkbox to send mail about access
-
 * Add english
-
-* Change +- 6/12 months to add 6/12 months from today
-
-* Add external mail address to verify the mail sent to ltu
-
-* Add week days to calendar
 
 ## Setup
 

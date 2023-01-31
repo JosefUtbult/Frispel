@@ -53,6 +53,11 @@
 	</ul>
 
 	<ul class="nav navbar-nav button-navbar float-none">
+		<li>
+			<form action="lang={% if lang == 'en'%}sv{% else %}en{% endif %}" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">
+				<input type="submit" class="btn btn-primary" value="{% if lang == 'en'%}Svenska{% else %}English{% endif %}"></input>
+			</form>
+		</li>
 		{% if user.is_authenticated %}
 		<li>
 			<form action="/account" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">

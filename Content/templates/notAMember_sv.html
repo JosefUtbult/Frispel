@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="document">
+    <h1>Ditt medlemskap är inaktivt</h1>
+    <p>
+        Antingen är du en ny medlem i Frispel, eller så har ditt medlemmskap gått ut. För att aktivera ditt medlemmskap,
+        gå till vår <a href={% url 'becomeAMember' %}>bli medlem</a> guide.
+
+    <p>
+        Om du redan har betalat och skrivit under medlemsavtalet, men ändå inte fått ditt konto aktiverat eller har övriga 
+        frågor gällande ditt medlemskap, maila Frispels kassör via frispel.kassor@gmail.com
+    </p>
+</div>
+
+{% endblock %}

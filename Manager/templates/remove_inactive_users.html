@@ -1,0 +1,35 @@
+{% extends "managerBase.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block manager_content %}
+
+<h1 class="m-2">
+    {% if lang == 'en' %}Remove Inactive Users{% else %}Ta bort inaktiva användare{% endif %}
+</h1>
+{% if inactive_users|length > 0 %}
+{% with inactive_users|first as first %}
+<form method="post">
+{% csrf_token %}
+        <div class="border py-2 my-4">
+        {% for userprofile in inactive_users %}
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                {{ userprofile.user.first_name }} {{ userprofile.user.last_name }}
+            </div>
+            <div class="col-2">
+                <input class="form-check-input" type="checkbox" name="{{ userprofile.user.username }}" checked>
+            </div>
+        </div>
+        <hr>
+        {% endfor %}
+        <div class="px-4">
+            <input type="submit" value="{% if lang == 'en' %}Remove{% else %}Ta bort{% endif %}" class="btn btn-secondary btn-block"></form>
+        </div>
+    </div>
+</form>
+{% endwith %}
+{% else %}
+    <p>{% if lang == 'en' %}There are no inactive users in the database{% else %}Det finns inga inaktiva användare i databasen{% endif %}</p>
+{% endif %}
+{% endblock %}
