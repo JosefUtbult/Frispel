@@ -16,6 +16,14 @@ COPY requirements.txt /root/requirements.txt
 
 COPY site /root/frispel
 
+COPY secrets/secret_key.txt /root/frispel/secret_key.txt
+
+COPY secrets/google_calendar_token.pickle \
+	/root/frispel/GoogleCalendar/token.pickle
+
+COPY secrets/google_mail_token.pickle \
+	/root/frispel/GoogleMail/token.pickle
+
 RUN pip install -r /root/requirements.txt --break-system-packages
 
 WORKDIR /root/frispel

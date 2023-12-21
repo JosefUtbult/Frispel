@@ -5,7 +5,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    #volumes:
-      #- ./site:/root/frispel
+    volumes:
+      - ./database:/root/frispel/database
     ports:
       - 8000:8000
