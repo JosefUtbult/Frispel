@@ -18,6 +18,8 @@ import dj_database_url
 
 import logging
 
+log = logging.getLogger(__file__)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,12 +40,12 @@ IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 if IS_HEROKU_APP:
     ALLOWED_HOSTS = ["*"]
     DEBUG = True
-    logging.info("Running as Heroku app")
+    log.info("Running as Heroku app")
     print("Running as Heroku app")
 else:
     ALLOWED_HOSTS = []
     DEBUG = True
-    logging.info("Running as debug app")
+    log.info("Running as debug app")
     print("Running as debug app")
 
 # Application definition
@@ -121,7 +123,7 @@ else:
         }
     }
 
-logging.info(f'Database config: {DATABASES}')
+log.info(f'Database config: {DATABASES}')
 print(f'Database config: {DATABASES}')
 
 # Password validation
