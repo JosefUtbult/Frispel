@@ -16,6 +16,8 @@ import secrets
 
 import dj_database_url
 
+import logging
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -33,13 +35,15 @@ SECRET_KEY = os.environ.get(
 
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
-if not IS_HEROKU_APP:
-    DEBUG = True
-
 if IS_HEROKU_APP:
     ALLOWED_HOSTS = ["*"]
+    logging.info("Running as Heroku app")
+    print("Running as Heroku app")
 else:
     ALLOWED_HOSTS = []
+    DEBUG = True
+    logging.info("Running as debug app")
+    print("Running as debug app")
 
 # Application definition
 
@@ -116,6 +120,8 @@ else:
         }
     }
 
+print(DATABASES)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -171,3 +177,4 @@ CAS_VERSION = '3'
 CAS_REDIRECT_URL = '/redirect'
 CAS_IGNORE_REFERER=True
 CAS_APPLY_ATTRIBUTES_TO_USER = True
+CAS_ADMIN_REDIRECT = False

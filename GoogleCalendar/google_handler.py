@@ -1,13 +1,13 @@
 #####################################################
-#													#
-#	Author: Josef Utbult							#
-#	Date: 9 Feb 2020								#
-#													#
-#	This software is written for 					# 
-#	Musikföreningen Frispel and is not				#
-#	meant to be used for applications other 		#
-#	than studying it.								#
-#													#
+#                                                   #
+# Author: Josef Utbult                              #
+# Date: 9 Feb 2020                                  #
+#                                                   #
+# This software is written for                      # 
+# Musikföreningen Frispel and is not                #
+# meant to be used for applications other           #
+# than studying it.                                 #
+#                                                   #
 #####################################################
 
 from __future__ import print_function
