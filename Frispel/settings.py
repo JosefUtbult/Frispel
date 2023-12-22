@@ -37,6 +37,7 @@ IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
 if IS_HEROKU_APP:
     ALLOWED_HOSTS = ["*"]
+    DEBUG = True
     logging.info("Running as Heroku app")
     print("Running as Heroku app")
 else:
