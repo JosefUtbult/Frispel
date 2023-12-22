@@ -25,6 +25,8 @@ from django.contrib import messages
 
 # Is called by the CAS. If this user already has logged in and created a user profile, redirect to home
 def redirect(request, lang=None):
+    print(f'Got request: {request} for user: ${request.user}')
+
     userprofile, created = Userprofile.objects.get_or_create(user=request.user)
     
     if created or not userprofile.is_set_up:
