@@ -22,18 +22,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '+%!cqf&lf0_)r+tq&pev0u9gx&4&(5z%su9f=b&u4^qgzzi*^d'
 
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    default=secrets.token_urlsafe(nbytes=64),
+)
 
-with open('secret_key.txt', 'r') as key_file:
-    SECRET_KEY = key_file.read()
+IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
+if not IS_HEROKU_APP:
+    DEBUG = True
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['130.240.200.252', 'frispel.rocks', '*.frispel.rocks']
-if DEBUG:
-    ALLOWED_HOSTS.append('localhost')
-
+if IS_HEROKU_APP:
+    ALLOWED_HOSTS = ["*"]
+else:
+    ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -94,12 +96,21 @@ WSGI_APPLICATION = 'Frispel.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if IS_HEROKU_APP:
+    DATABASES = {
+        "default": dj_database_url.config(
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True,
+        ),
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'database', 'db.sqlite3'),
+        }
+    }
 
 
 # Password validation
