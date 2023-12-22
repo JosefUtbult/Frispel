@@ -121,8 +121,8 @@ else:
         }
     }
 
-print(DATABASES)
-
+logging.info(f'Database config: {DATABASES}')
+print(f'Database config: {DATABASES}')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
