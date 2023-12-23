@@ -19,8 +19,8 @@ from User import views as user_views
 import django_cas_ng.views
 
 urlpatterns = [
-    path('login/', django_cas_ng.views.LoginView.as_view(), name='cas_ng_login'),
-    path('logout/', django_cas_ng.views.LogoutView.as_view(), name='cas_ng_logout'),
+    path('login/', django_cas_ng.views.LoginView.as_view(), name='login'),
+    path('logout/', django_cas_ng.views.LogoutView.as_view(), name='logout'),
     path('redirect/lang=<str:lang>', user_views.redirect, name='redirect'),
     path('redirect/', user_views.redirect, name='redirect'),
     path('account/lang=<str:lang>', user_views.account, name='account'),
