@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
+{% if user.is_authenticated %}
 <link rel="stylesheet" type="text/css" href="{% static 'calenderStyle.css' %}">
 
 <h1 class="m-3">{% if lang == 'en' %}Calendar{% else %}Kalender{% endif %}</h1>
@@ -54,5 +54,6 @@
 </div>
 {% endfor %}
 <hr>
+{% endif %}
 
 {% endblock %}	

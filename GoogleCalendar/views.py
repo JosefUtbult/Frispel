@@ -19,8 +19,10 @@ from .google_handler import book_block, unbook_block
 from User.models import Userprofile
 from User.views import check_set_up
 
-@login_required(login_url='login')
 def calendar(request, lang=None):
+    if not request.user.is_authenticated:
+        return redirect('notAMember')
+
     is_setup = check_set_up(request, lang)
     if is_setup != True:
         return is_setup
