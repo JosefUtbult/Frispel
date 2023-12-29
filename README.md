@@ -51,6 +51,7 @@ Kopiera över följande filer manuellt med `scp`.
 
 - `frispel-docker/database`
 - `frispel-docer/secrets`
+- `gdrive-docker/credentials`
 
 Filerna ska finnas på Frispels-driven.
 
