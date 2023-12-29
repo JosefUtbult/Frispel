@@ -33,5 +33,14 @@ services:
       - ./nginx-docker/user_conf.d:/etc/nginx/user_conf.d
       - ./log/nginx-docker:/var/log/nginx
 
+  gdrive:
+    build: 
+      context: gdrive-docker
+      dockerfile: Dockerfile
+    volumes:
+      - ./frispel-docker/database:/root/database
+    ports:
+      - 8085:8085
+
 networks:
   docker-network:

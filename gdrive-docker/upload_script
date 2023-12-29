@@ -1,0 +1,12 @@
+#!/bin/bash
+
+DIR_ID=1TjMmIQPo8HUgLybnuqbJSPFqgXRXLEIy
+
+while true; do
+	db="/root/`date +'%d-%m-%Y'`-db.sqlite3"
+	cp /root/database/db.sqlite3 $db
+
+	echo "Uploading $db to Google drive"
+	gdrive files upload --parent $DIR_ID $db
+	sleep 86400
+done

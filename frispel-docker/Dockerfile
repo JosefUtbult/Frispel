@@ -2,7 +2,7 @@ FROM ubuntu:23.04
 
 RUN apt update -y
 RUN apt upgrade -y
-Run apt install -y \
+RUN apt install -y \
 	nginx \
 	python3-pip \
 	python3-venv \
