@@ -1,4 +1,5 @@
 venv/
+log/
 *sublime*
 **/token.pickle
 **/__pycache__/
@@ -7,3 +8,4 @@ venv/
 
 frispel-docker/secrets/
 frispel-docker/database/
+nginx-docker/nginx_secrets

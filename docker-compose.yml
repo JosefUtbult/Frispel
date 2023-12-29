@@ -1,11 +1,37 @@
 version: '3.8'
 
 services:
-  devcontainer:
+  web:
     build: 
       context: frispel-docker
       dockerfile: Dockerfile
     volumes:
       - ./frispel-docker/database:/root/frispel/database
+      - ./log/frispel-docker:/root/frispel/log
     ports:
       - 8000:8000
+    networks:
+      docker-network:
+        aliases:
+          - web
+  nginx:
+    image: jonasal/nginx-certbot:latest
+    restart: unless-stopped
+    environment:
+      - CERTBOT_EMAIL=frispel.webmaster@gmail.com
+    env_file:
+      - ./nginx-docker/nginx-docker.env
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      docker-network:
+        aliases:
+          - nginx
+    volumes:
+      - ./nginx-docker/nginx_secrets:/etc/letsencrypt
+      - ./nginx-docker/user_conf.d:/etc/nginx/user_conf.d
+      - ./log/nginx-docker:/var/log/nginx
+
+networks:
+  docker-network:
