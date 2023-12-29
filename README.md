@@ -1,5 +1,25 @@
 # Frispel
 
+## Utveckling
+
+För utveckling kan du köra `web` dockern på din egna dator.
+
+Se till att du har `docker` och `docker-compose` installerat på maskinen.
+
+Kör sedan dockercontainern `web` med docker-compose. **Kör inte alla containrar, då `nginx` containern kommer försöka skapa ett certificat**.
+
+```bash
+docker-compose up -d web
+```
+
+När du gjort dina ändringar kan du bygga om containern och köra den igen.
+
+```bash
+docker-compose down
+docker-compose build
+docker-compose up -d web
+```
+
 ## Setup
 
 Fixa en virtuell maskin. På [Vultr](https://www.vultr.com/) kan du skapa en VPS. Använd sedan Cloudflare för att peka URLn till den virtuella maskinens IP.
