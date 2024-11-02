@@ -1,12 +1,7 @@
 venv/
 log/
-*sublime*
-**/token.pickle
 **/__pycache__/
 **/__pycache__/**
 *.pyc
 
-frispel-docker/secrets/
-frispel-docker/database/
-nginx-docker/nginx_secrets
-gdrive-docker/credentials
+persistent/

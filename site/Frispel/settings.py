@@ -14,28 +14,24 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LOG_DIR = os.path.join(BASE_DIR, 'log')
+
+LOG_DIR = os.path.join(BASE_DIR, '..', 'log')
+LOG_FILE = os.path.join(LOG_DIR, 'django.log')
 
 if not os.path.exists(LOG_DIR):
     os.makedirs(LOG_DIR)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = '+%!cqf&lf0_)r+tq&pev0u9gx&4&(5z%su9f=b&u4^qgzzi*^d'
-
-
-with open('secret_key.txt', 'r') as key_file:
+SECRETS_DIR = os.path.join(BASE_DIR, '..', 'secrets')
+SECRETS_FILE = os.path.join(SECRETS_DIR, 'secret_key.txt')
+with open(SECRETS_FILE, 'r') as key_file:
     SECRET_KEY = key_file.read()
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['130.240.200.252', '70.34.216.184', 'frispel.rocks', '*.frispel.rocks', 'www.frispel.rocks']
 if DEBUG:
-    ALLOWED_HOSTS.append('localhost')
+    ALLOWED_HOSTS += ['localhost']
 
 
 # Application definition
@@ -97,10 +93,12 @@ WSGI_APPLICATION = 'Frispel.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+DATABASE_FILE = os.path.join(BASE_DIR, '..', 'database', 'db.sqlite3')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'database', 'db.sqlite3'),
+        'NAME': DATABASE_FILE,
     }
 }
 
@@ -116,20 +114,20 @@ LOGGING = {
     'handlers': {
         'file': {
             'formatter': 'default',
-            'level': 'DEBUG' if DEBUG else 'INFO',
+            'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': 'log/django.log',
+            'filename': LOG_FILE,
         },
         'console': {
             'formatter': 'default',
-            'level': 'DEBUG' if DEBUG else 'INFO',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
         }
     },
     'loggers': {
         'django': {
             'handlers': ['console', 'file'],
-            'level': 'DEBUG' if DEBUG else 'INFO',
+            'level': 'INFO',
             'propagate': True,
         },
     },
@@ -171,11 +169,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # CAS configuration
@@ -190,3 +186,4 @@ CAS_REDIRECT_URL = '/redirect'
 CAS_IGNORE_REFERER = True
 CAS_APPLY_ATTRIBUTES_TO_USER = True
 CAS_ADMIN_REDIRECT = False
+

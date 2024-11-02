@@ -4,24 +4,27 @@ services:
   web:
     restart: unless-stopped
     build: 
-      context: frispel-docker
+      context: frispel
       dockerfile: Dockerfile
     volumes:
-      - ./frispel-docker/database:/root/frispel/database
-      - ./log/frispel-docker:/root/frispel/log
+      - ../site:/root/frispel/site
+      - ../persistent/frispel/secrets:/root/frispel/secrets:ro
+      - ../persistent/frispel/database:/root/frispel/database
+      - ../log/frispel:/root/frispel/log
     ports:
       - 8000:8000
     networks:
       docker-network:
         aliases:
           - web
+
   nginx:
     image: jonasal/nginx-certbot:latest
     restart: unless-stopped
     environment:
       - CERTBOT_EMAIL=frispel.webmaster@gmail.com
     env_file:
-      - ./nginx-docker/nginx-docker.env
+      - ./nginx/nginx-docker.env
     ports:
       - 80:80
       - 443:443
@@ -30,19 +33,21 @@ services:
         aliases:
           - nginx
     volumes:
-      - ./nginx-docker/nginx_secrets:/etc/letsencrypt
-      - ./nginx-docker/user_conf.d:/etc/nginx/user_conf.d
-      - ./log/nginx-docker:/var/log/nginx
+      - ../persistent/nginx:/etc/letsencrypt
+      - ./nginx/user_conf.d:/etc/nginx/user_conf.d
+      - ../log/nginx:/var/log/nginx
 
   gdrive:
     restart: unless-stopped
     build: 
-      context: gdrive-docker
+      context: gdrive
       dockerfile: Dockerfile
     volumes:
-      - ./frispel-docker/database:/root/database
+      - ../persistent/frispel/database:/root/database
+      - ../log/gdrive:/var/log/gdrive
     ports:
       - 8085:8085
 
 networks:
   docker-network:
+    driver: bridge

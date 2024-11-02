@@ -23,18 +23,17 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from datetime import date
 
+from Frispel.settings import SECRETS_DIR
+
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
+TOKEN_FILE = os.path.join(SECRETS_DIR, 'google_mail_token.pickle')
 
 def generate_service():
     # Uses a bunch of stuff. Don't really know
-    try:
-        with open('GoogleMail/token.pickle', 'rb') as token:
-            creds = pickle.load(token)
-    except:
-        with open('token.pickle', 'rb') as token:
-            creds = pickle.load(token)
+    with open(TOKEN_FILE, 'rb') as token:
+        creds = pickle.load(token)
 
     service = build('gmail', 'v1', credentials=creds)
     

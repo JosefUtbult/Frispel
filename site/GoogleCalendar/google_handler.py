@@ -13,11 +13,12 @@
 from __future__ import print_function
 from datetime import datetime, date, timedelta
 import pickle
-import os.path
+import os
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from pyrfc3339 import parse as RFC3339_parse
+from Frispel.settings import SECRETS_DIR
 
 # URL for googles scope
 # If modifying these scopes, delete the file token.pickle and run the generate_token function
@@ -30,16 +31,12 @@ CALENDARID = '4u2k2reraaaa3cb1ekho0kdjic@group.calendar.google.com'
 # The amount of events that should be pulled from google every time
 MAXRESULTSPERREQUEST = 100
 
+TOKEN_FILE = os.path.join(SECRETS_DIR, 'google_calendar_token.pickle')
 
 # Sets up a google service
 def generate_service():
-    # Uses a bunch of stuff. Don't really know
-    try:
-        with open('GoogleCalendar/token.pickle', 'rb') as token:
-            creds = pickle.load(token)
-    except:
-        with open('token.pickle', 'rb') as token:
-            creds = pickle.load(token)
+    with open(TOKEN_FILE, 'rb') as token:
+        creds = pickle.load(token)
 
     return build('calendar', 'v3', credentials=creds)
 

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+DIR_ID=1TjMmIQPo8HUgLybnuqbJSPFqgXRXLEIy
+
+LOGDIR="/var/log/gdrive"
+LOGFILE="$LOGDIR/gdrive.log"
+
+function runServer() {
+	while true; do
+		db="/root/`date +'%d-%m-%Y'`-db.sqlite3"
+		cp /root/database/db.sqlite3 $db
+
+		echo "Uploading $db to Google drive"
+		gdrive files upload --parent $DIR_ID $db
+		sleep 86400
+	done
+}
+mkdir -p $LOGDIR
+runServer 2>&1 | tee $LOGFILE

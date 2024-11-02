@@ -5,7 +5,7 @@ RUN apt upgrade -y
 RUN apt install -y \
 	wget
 
-COPY credentials /root/.config/gdrive3
+COPY ../../persistent/gdrive /root/.config/gdrive3
 
 COPY upload_script /bin
 
