@@ -6,7 +6,7 @@ After=docker.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-WorkingDirectory=/root/Frispel
+WorkingDirectory=/root/Frispel/docker
 ExecStart=/bin/docker-compose up -d
 ExecStop=/bin/docker-compose down
 TimeoutStartSec=0
