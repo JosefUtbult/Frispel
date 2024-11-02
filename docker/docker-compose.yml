@@ -2,6 +2,9 @@ version: '3.8'
 
 services:
   web:
+    environment:
+      # Disable in production
+      DEBUG: false
     restart: unless-stopped
     build: 
       context: frispel

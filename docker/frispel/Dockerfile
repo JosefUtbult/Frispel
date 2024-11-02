@@ -15,6 +15,10 @@ RUN apt install -y \
 COPY requirements.txt /root/requirements.txt
 RUN pip install -r /root/requirements.txt --break-system-packages
 
+COPY run_server /bin
+
+RUN chmod +x /bin/run_server
+
 WORKDIR /root/frispel/site
 
-ENTRYPOINT gunicorn --bind 0.0.0.0:8000 Frispel.wsgi
+ENTRYPOINT /bin/run_server

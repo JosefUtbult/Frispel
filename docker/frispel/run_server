@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ -n "$DEBUG" && "$DEBUG" == "true" ]]; then
+	echo "Running in debug mode"
+	python3 manage.py runserver 0.0.0.0:8000;
+else
+	echo "Running in release mode"
+	gunicorn --bind 0.0.0.0:8000 Frispel.wsgi;
+fi

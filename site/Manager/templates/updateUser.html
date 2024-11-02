@@ -10,31 +10,31 @@
 	<div class="col-8">	
 		<div class="row">
 			<form method="post" class="p-4 col-6">
-	    		{% csrf_token %}
+				{% csrf_token %}
 				<input type="hidden" name="append" value="6m">
 				<input type="submit" value="{% if lang == 'en' %}Add 6 months{% else %}Lägg till 6 månader{% endif %}" class="btn btn-secondary">
 			</form>
 			<form method="post" class="p-4 col-6">
-	    		{% csrf_token %}
+				{% csrf_token %}
 				<input type="hidden" name="append" value="12m">
 				<input type="submit" value="{% if lang == 'en' %}Add 12 months{% else %}Lägg till 12 månader{% endif %}" class="btn btn-secondary">
 			</form>
 		</div>
 
 		<form method="post">
-	    	{% csrf_token %}
-	    	<div class="form-group row">
-	    		<div class="col-12">
-	    			<input type="date" name="date" value="{{ currentUser.registered_expiry_date|date:'Y-m-d' }}" class="form-control">
-	    		</div>
-	    	</div>
-    	
-	    	{{ extended_user_form|crispy }}
-	    	{{ userprofile_form|crispy }}
-	    	{{ manager_userprofileform|crispy }}
-	    	{{ manager_userform|crispy }}
+			{% csrf_token %}
+			<div class="form-group row">
+				<div class="col-12">
+					<input type="date" name="date" value="{{ currentUser.registered_expiry_date|date:'Y-m-d' }}" class="form-control">
+				</div>
+			</div>
+		
+			{{ extended_user_form|crispy }}
+			{{ userprofile_form|crispy }}
+			{{ manager_userprofileform|crispy }}
+			{{ manager_userform|crispy }}
 			<input type="submit" value="{% if lang == 'en' %}Set{% else %}Sätt{% endif %}" class="btn btn-secondary">
-    	</form>
+		</form>
 	</div>
 </div>
 {% endif %}

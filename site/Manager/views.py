@@ -22,6 +22,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from User.models import Userprofile
 from User.forms import CustomUserForm, UserprofileForm, Manageruserform, ManagerprofileForm
 from GoogleMail.google_mail import send_access_mail
+from Frispel.settings import logger
 
 # Mail to the person responsible for adding access
 TO_MAIL = 'nicklas.lindgren@ltu.se'
@@ -39,9 +40,7 @@ MESSAGE_BODY = "Hej. Följande {person} behöver access till replokalen Frispel 
                "svara på det för att jag ska se det.\n" \
                "Tack på förhand.\n" \
                "\n" \
-               "Josef Utbult, Webbmaster/Kassör Frispel"
-
-
+               "Elias Falk, Ordförande Frispel"
 
 @staff_member_required
 def manager(request, lang=None):
@@ -107,9 +106,10 @@ def updateUser(request, username, lang=None):
 
     if request.method == 'POST':
         if 'append' in request.POST and request.POST['append'] in ['6m', '12m']:
+            logger.info(f"Adding 6/12 months to {username}")
             userprofile.application_expiry_date = date.today() + timedelta(days=186 if request.POST['append'] == '6m' else 365)
             userprofile.save()
-        else:    
+        else:
             extended_user_form = CustomUserForm(request.POST)
             manager_userform = Manageruserform(request.POST)
             userprofile_form = UserprofileForm(request.POST)
@@ -125,8 +125,13 @@ def updateUser(request, username, lang=None):
                 userprofile.favorite_food = userprofile_form.cleaned_data.get("favorite_food")
                 userprofile.bookings_allowed = manager_userprofileform.cleaned_data.get("bookings_allowed")
                 userprofile.trubadur_member = manager_userprofileform.cleaned_data.get("trubadur_member")
-                userprofile.extended_membership_status = manager_userprofileform.cleaned_data.get(
-                    "extended_membership_status")
+                userprofile.extended_membership_status = manager_userprofileform.cleaned_data.get("extended_membership_status")
+                
+                if 'date' in request.POST:
+                    logger.info(f"Datestring: {request.POST['date']}")
+                    date_obj = date.fromisoformat(request.POST['date'])
+                    userprofile.application_expiry_date = date_obj
+
                 userprofile.save()
 
         return redirect('manageUser', username)
@@ -145,14 +150,18 @@ def register_access(request, lang=None):
     changed_userprofiles = list(filter(lambda instance: instance.application_expiry_date != instance.registered_expiry_date, Userprofile.objects.all()))
 
     if request.method == 'POST':
-        print(request.POST)
         if 'reset' in request.POST:
             userprofile = Userprofile.objects.get(user=User.objects.get(username=request.POST['reset']))
             userprofile.application_expiry_date = userprofile.registered_expiry_date
             userprofile.save()
         else:
-            mail = generate_mail(changed_userprofiles)
-            send_access_mail(mail)
+            # Check if the no-mail checkbox is unticked. In that case, send the mail
+            if not 'no-mail' in request.POST:
+                logger.info("Sending mail")
+                mail = generate_mail(changed_userprofiles)
+                send_access_mail(mail)
+            else:
+                logger.info("Not sending mail as no-mail was checked")
             
             for userprofile in changed_userprofiles:
                 userprofile.registered_expiry_date = userprofile.application_expiry_date
@@ -198,12 +207,12 @@ def generate_mail(userprofiles):
     cc += [FROM_MAIL]
     
     return {
-                'from': FROM_MAIL,
-                'to': TO_MAIL if not settings.DEBUG else DEBUG_TO_MAIL, 
-                'cc': cc, 
-                'title': 'Access to frispel', 
-                'body': MESSAGE_BODY.format(person='person', body=body)
-            }
+        'from': FROM_MAIL,
+        'to': TO_MAIL if not settings.DEBUG else DEBUG_TO_MAIL, 
+        'cc': cc, 
+        'title': 'Access to frispel', 
+        'body': MESSAGE_BODY.format(person='person', body=body)
+    }
 
 def get_inactive_users():
     return list(filter(lambda instance: 

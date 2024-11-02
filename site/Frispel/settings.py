@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import logging
+
+logger = logging.getLogger('django')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,8 +29,10 @@ SECRETS_FILE = os.path.join(SECRETS_DIR, 'secret_key.txt')
 with open(SECRETS_FILE, 'r') as key_file:
     SECRET_KEY = key_file.read()
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
+
+if DEBUG:
+    logger.warn("Running in debug mode")
 
 ALLOWED_HOSTS = ['130.240.200.252', '70.34.216.184', 'frispel.rocks', '*.frispel.rocks', 'www.frispel.rocks']
 if DEBUG:
@@ -167,11 +172,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static')
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# )
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # CAS configuration

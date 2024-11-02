@@ -24,7 +24,7 @@
 		</div>
 		<div>
 			<form method="post" class="col">
-	    		{% csrf_token %}
+				{% csrf_token %}
 				<input type="hidden" name="reset" value="{{ userprofile.user.username }}">
 				<input type="submit" value="Reset" class="btn btn-secondary">
 			</form>
@@ -45,9 +45,17 @@ CC: {% for instance in mail.cc %}{{ instance }} {% endfor %}
 <div class="row m-4">
 	<div class="col-2"></div>
 	<form method="post" class="col-8">
-	    {% csrf_token %}
-		<input type="submit" value="Send" class="btn btn-secondary btn-block">
-	</form>
+		{% csrf_token %}
+		<input type="checkbox" id="no-mail" name="no-mail" value="true">
+		<label for="no-mail">
+			 {% if lang == 'en' %}
+				  Update access without sending a mail
+			 {% else %}
+				  Updatera tillgång utan att sända ett mail
+			 {% endif %}
+		</label>
+		<input type="submit" value="Submit" class="btn btn-secondary btn-block">
+</form>
 </div>
 
 {% else %}
