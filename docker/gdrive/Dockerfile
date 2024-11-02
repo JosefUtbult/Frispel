@@ -1,11 +1,6 @@
 FROM ubuntu:23.04
 
-RUN apt update -y
-RUN apt upgrade -y
-RUN apt install -y \
-	wget
-
-COPY ../../persistent/gdrive /root/.config/gdrive3
+RUN apt update -y && apt upgrade -y && apt install -y wget
 
 COPY upload_script /bin
 

@@ -46,6 +46,7 @@ services:
       context: gdrive
       dockerfile: Dockerfile
     volumes:
+      - ../persistent/gdrive:/root/.config/gdrive3
       - ../persistent/frispel/database:/root/database
       - ../log/gdrive:/var/log/gdrive
     ports:

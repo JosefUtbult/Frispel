@@ -7,8 +7,8 @@ After=docker.service
 Type=oneshot
 RemainAfterExit=yes
 WorkingDirectory=/root/Frispel/docker
-ExecStart=/bin/docker-compose up -d
-ExecStop=/bin/docker-compose down
+ExecStart=/bin/docker compose up -d
+ExecStop=/bin/docker compose down
 TimeoutStartSec=0
 
 [Install]
