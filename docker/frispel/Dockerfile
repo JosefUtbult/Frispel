@@ -1,8 +1,8 @@
-FROM ubuntu:23.04
+FROM ubuntu:24.04
 
-RUN apt update -y
-RUN apt upgrade -y
-RUN apt install -y \
+RUN apt-get update && \
+	apt-get upgrade -y && \
+	apt-get install -y \
 	nginx \
 	python3-pip \
 	python3-venv \
@@ -12,13 +12,17 @@ RUN apt install -y \
 	python3-certbot-nginx \
 	python3-venv
 
-COPY requirements.txt /root/requirements.txt
-RUN pip install -r /root/requirements.txt --break-system-packages
 
-COPY run_server /bin
+WORKDIR /root
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 
-RUN chmod +x /bin/run_server
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+WORKDIR /bin
+COPY run_server .
+RUN chmod +x run_server
 
 WORKDIR /root/frispel/site
-
 ENTRYPOINT /bin/run_server
