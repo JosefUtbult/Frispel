@@ -3,8 +3,11 @@ $( document ).ready(function() {
 	// Hide the hidden image thats there for 
 	$("#hiddenImage").hide();
 
+	
 	// Display and remove header on scroll
     var position = $(window).scrollTop(); 
+
+	/* Meh, det typ funka inte
 	$(window).scroll(function() {
 		// Don't hide scroll for mobile applications
 		if($(window).width() > 991) {
@@ -16,6 +19,6 @@ $( document ).ready(function() {
 			}
 			position = scroll;
 		}
-	});
+	});*/
 
 });

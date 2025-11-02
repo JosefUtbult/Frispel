@@ -1,13 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="img-fluid" style="background-image: url('{% static 'drums.jpeg' %}');">
-	<div class="img-fluid-container">
-		<h1>
-			{% block hed1 %}{% endblock %}
-		</h1>
-	</div>
+<div class="home-img" style="
+	background-image: url('{% static 'drums.jpeg' %}');
+	background-position: top;
+	background-size: 100%;
+	height: 50vh;
+	">
 </div>
+
+<script>
+  window.addEventListener('scroll', function() {
+    const el = document.querySelector('.home-img');
+    const speed = 0.5; // justera hur mycket bilden rör sig (0.1–0.5 funkar bra)
+    const offset = window.scrollY * speed;
+    el.style.backgroundPositionY = `${- offset}px`; // inverterad rörelse
+  });
+</script>
 
 {% comment %}<div class="message">{% endcomment %}
 	{% comment %}<p>{% block message %}{% endblock %}</p>{% endcomment %}

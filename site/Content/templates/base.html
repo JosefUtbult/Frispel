@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>Frispel</title>
+	<link rel="icon" type="image/ico" href="{% static 'favicon.ico' %}">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -53,7 +54,18 @@
 			<a class="nav-link" href="{% url 'becomeAMember' %}lang={% if lang %}{{lang}}{% else %}sv{% endif %}">{% if lang == 'en' %}Become a member{% else %}Bli medlem{% endif %}</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="{% static 'documents/MembershipAgreement.pdf' %}">{% if lang == 'en' %}Membership agreement{% else %}Medlemsavtal{% endif %}</a>
+			<a class="nav-link" 
+				href=	"{% if lang == 'en' %}
+							{% static 'documents/MembershipAgreement-en.pdf' %}
+						{% else %}
+							{% static 'documents/MembershipAgreement-sv.pdf' %}
+						{% endif %}">
+				{% if lang == 'en' %}
+					Membership agreement
+				{% else %}
+					Medlemsavtal
+				{% endif %}
+			</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="{% static 'documents/RulesOfProcedure.pdf' %}">{% if lang == 'en' %}Rules of procedure{% else %}Ordningsregler{% endif %}</a>
