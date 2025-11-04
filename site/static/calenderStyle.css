@@ -21,3 +21,9 @@
 	color: white;
 	background-color: var(--frispel-red);
 }
+
+/* Dark mode */
+
+body.dark-mode .disabled {
+	background-color: var(--frispel-dark-gray);
+}

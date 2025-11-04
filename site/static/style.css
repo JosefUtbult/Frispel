@@ -1,10 +1,11 @@
 :root {
     --frispel-gray:#3e4a4d;
     --frispel-shadow-gray:#303436;
+	--frispel-dark-gray: #121414;
 
 	--frispel-light-gray:#f0f6f7;
 
-
+	--frispel-bright-red:#de423d;
     --frispel-red:#bf423d;
     --frispel-shadow-red:#8c2921;
 }
@@ -108,14 +109,6 @@ a:hover {
 	.nav-link, .dropdown-item {
 		font-size: calc(12px + 1.5vw);
 	}
-
-	#hiddenImage > img {
-        position: static !important;
-        width: auto !important;
-        height: auto !important;
-        object-fit: none !important;
-        object-position: initial !important;
-    }
 }
 
 .bg-frispel-dark {
@@ -234,4 +227,70 @@ footer h1, footer h2, footer h2, footer h3, footer h4, footer h5, footer h6, foo
 
 .message p, .message strong {
 	color: white;
+}
+
+
+/*
+// DARK MODE
+*/
+
+body.dark-mode {
+	background-color: var(--frispel-shadow-gray);
+	color: var(--frispel-light-gray);
+}
+
+/* Links */
+body.dark-mode a {
+	color: var(--frispel-bright-red) !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode p,
+body.dark-mode strong,
+body.dark-mode label,
+body.dark-mode li,
+body.dark-mode small {
+	color: var(--frispel-light-gray);
+}
+
+body.dark-mode .message p, 
+body.dark-mode .message strong {
+	color: var(--frispel-gray);
+}
+
+
+body.dark-mode .primary h1, 
+body.dark-mode .primary h2, 
+body.dark-mode .primary h3, 
+body.dark-mode .primary h4, 
+body.dark-mode .primary h5, 
+body.dark-mode .primary h6, 
+body.dark-mode .primary p, 
+body.dark-mode .primary strong, 
+body.dark-mode .primary label, 
+body.dark-mode .primary li, 
+body.dark-mode .primary small{
+	color: var(--frispel-shadow-gray) !important;
+}
+
+/* User profile */
+body.dark-mode .card {
+	background-color: transparent !important;
+}
+
+/* Login message */
+body.dark-mode .alert-success {
+	color: #d4edda !important;
+	background-color: #155724 !important;
+}
+
+/* Keep navbar, footer untouched */
+#darkModeBtn:focus {
+	box-shadow: none !important;
+    outline: none !important;
 }

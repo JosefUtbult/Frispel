@@ -17,6 +17,10 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Inria+Serif|Kulim+Park&display=swap" rel="stylesheet">
 
+	<script>
+    	const LANG = "{{ lang|default:'sv' }}";
+	</script>
+
 </head>
 <body>
 
@@ -78,6 +82,11 @@
 				<input type="submit" class="btn btn-primary" value="{% if lang == 'en' %}Svenska{% else %}English{% endif %}"></input>
 			</form>
 		</li>
+		<li>
+			<form onsubmit="toggleDarkMode(); return false;" class="navbar-nav pull-right m-2 my-4 my-lg-2">
+				<input id="darkModeBtn" type="submit" class="btn btn-primary" value="{% if lang == 'en' %}Dark mode{% else %}Mörkt läge{% endif %}"></input>
+			</form>
+		</li>
 		{% if user.is_authenticated %}
 		<li>
 			<form action="/account/lang={% if lang %}{{lang}}{% else %}sv{% endif %}" method="get" class="navbar-nav pull-right m-2 my-4 my-lg-2">
@@ -133,5 +142,8 @@
 		<h6>{% if lang == 'en' %}Cashier{% else %}Kassör{% endif %}: <a href="mailto:frispel.kassor@gmail.com" class="link-unstyled">frispel.kassor@gmail.com</a></h6>
 	</div>
 </footer>
+
+<script src="{% static 'js/display.js' %}"></script>
+
 </body>
 </html>
